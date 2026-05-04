@@ -2,6 +2,7 @@
 name: using-superpowers
 description: Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
 ---
+use caveman ultra
 
 <SUBAGENT-STOP>
 If dispatched as subagent for specific task, skip this skill.
