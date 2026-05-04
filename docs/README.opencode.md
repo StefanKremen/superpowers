@@ -1,10 +1,10 @@
 # Superpowers for OpenCode
 
-Complete guide for using Superpowers with [OpenCode.ai](https://opencode.ai).
+Guide for Superpowers with [OpenCode.ai](https://opencode.ai).
 
 ## Installation
 
-Add superpowers to the `plugin` array in your `opencode.json` (global or project-level):
+Add superpowers to `plugin` array in `opencode.json` (global or project):
 
 ```json
 {
@@ -12,13 +12,13 @@ Add superpowers to the `plugin` array in your `opencode.json` (global or project
 }
 ```
 
-Restart OpenCode. The plugin auto-installs via Bun and registers all skills automatically.
+Restart OpenCode. Plugin auto-install via Bun, register all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify: ask "Tell me about your superpowers"
 
 ### Migrating from the old symlink-based install
 
-If you previously installed superpowers using `git clone` and symlinks, remove the old setup:
+Old install used `git clone` + symlinks. Remove old setup:
 
 ```bash
 # Remove old symlinks
@@ -31,13 +31,13 @@ rm -rf ~/.config/opencode/superpowers
 # Remove skills.paths from opencode.json if you added one for superpowers
 ```
 
-Then follow the installation steps above.
+Then install steps above.
 
 ## Usage
 
 ### Finding Skills
 
-Use OpenCode's native `skill` tool to list all available skills:
+OpenCode native `skill` tool list skills:
 
 ```
 use skill tool to list skills
@@ -51,7 +51,7 @@ use skill tool to load superpowers/brainstorming
 
 ### Personal Skills
 
-Create your own skills in `~/.config/opencode/skills/`:
+Make own skills in `~/.config/opencode/skills/`:
 
 ```bash
 mkdir -p ~/.config/opencode/skills/my-skill
@@ -72,15 +72,15 @@ description: Use when [condition] - [what it does]
 
 ### Project Skills
 
-Create project-specific skills in `.opencode/skills/` within your project.
+Project-specific skills in `.opencode/skills/` inside project.
 
-**Skill Priority:** Project skills > Personal skills > Superpowers skills
+**Skill Priority:** Project > Personal > Superpowers
 
 ## Updating
 
-Superpowers updates automatically when you restart OpenCode. The plugin is re-installed from the git repository on each launch.
+Superpowers auto-update on OpenCode restart. Plugin re-install from git each launch.
 
-To pin a specific version, use a branch or tag:
+Pin version: use branch or tag:
 
 ```json
 {
@@ -90,41 +90,41 @@ To pin a specific version, use a branch or tag:
 
 ## How It Works
 
-The plugin does two things:
+Plugin do two things:
 
-1. **Injects bootstrap context** via the `experimental.chat.system.transform` hook, adding superpowers awareness to every conversation.
-2. **Registers the skills directory** via the `config` hook, so OpenCode discovers all superpowers skills without symlinks or manual config.
+1. **Inject bootstrap context** via `experimental.chat.system.transform` hook → superpowers awareness every conversation.
+2. **Register skills dir** via `config` hook → OpenCode discover superpowers skills, no symlinks or manual config.
 
 ### Tool Mapping
 
-Skills written for Claude Code are automatically adapted for OpenCode:
+Claude Code skills auto-adapt for OpenCode:
 
 - `TodoWrite` → `todowrite`
-- `Task` with subagents → OpenCode's `@mention` system
-- `Skill` tool → OpenCode's native `skill` tool
-- File operations → Native OpenCode tools
+- `Task` with subagents → OpenCode `@mention` system
+- `Skill` tool → OpenCode native `skill` tool
+- File ops → Native OpenCode tools
 
 ## Troubleshooting
 
 ### Plugin not loading
 
 1. Check OpenCode logs: `opencode run --print-logs "hello" 2>&1 | grep -i superpowers`
-2. Verify the plugin line in your `opencode.json` is correct
-3. Make sure you're running a recent version of OpenCode
+2. Verify plugin line in `opencode.json` correct
+3. Run recent OpenCode version
 
 ### Skills not found
 
-1. Use OpenCode's `skill` tool to list available skills
-2. Check that the plugin is loading (see above)
-3. Each skill needs a `SKILL.md` file with valid YAML frontmatter
+1. Use OpenCode `skill` tool to list skills
+2. Check plugin loads (see above)
+3. Each skill need `SKILL.md` with valid YAML frontmatter
 
 ### Bootstrap not appearing
 
-1. Check OpenCode version supports `experimental.chat.system.transform` hook
-2. Restart OpenCode after config changes
+1. Check OpenCode version support `experimental.chat.system.transform` hook
+2. Restart OpenCode after config change
 
 ## Getting Help
 
 - Report issues: https://github.com/obra/superpowers/issues
-- Main documentation: https://github.com/obra/superpowers
+- Main docs: https://github.com/obra/superpowers
 - OpenCode docs: https://opencode.ai/docs/

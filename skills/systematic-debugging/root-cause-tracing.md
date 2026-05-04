@@ -2,9 +2,9 @@
 
 ## Overview
 
-Bugs often manifest deep in the call stack (git init in wrong directory, file created in wrong location, database opened with wrong path). Your instinct is to fix where the error appears, but that's treating a symptom.
+Bugs often manifest deep in call stack (git init wrong dir, file wrong location, DB wrong path). Instinct: fix where error appears. That treat symptom.
 
-**Core principle:** Trace backward through the call chain until you find the original trigger, then fix at the source.
+**Core principle:** Trace back through call chain to original trigger. Fix at source.
 
 ## When to Use
 
@@ -24,10 +24,10 @@ digraph when_to_use {
 ```
 
 **Use when:**
-- Error happens deep in execution (not at entry point)
-- Stack trace shows long call chain
-- Unclear where invalid data originated
-- Need to find which test/code triggers the problem
+- Error deep in exec (not entry)
+- Stack trace long call chain
+- Invalid data origin unclear
+- Need find which test/code trigger
 
 ## The Tracing Process
 
@@ -37,7 +37,7 @@ Error: git init failed in /Users/jesse/project/packages/core
 ```
 
 ### 2. Find Immediate Cause
-**What code directly causes this?**
+**Code direct cause?**
 ```typescript
 await execFileAsync('git', ['init'], { cwd: projectDir });
 ```
@@ -51,13 +51,13 @@ WorktreeManager.createSessionWorktree(projectDir, sessionId)
 ```
 
 ### 4. Keep Tracing Up
-**What value was passed?**
-- `projectDir = ''` (empty string!)
-- Empty string as `cwd` resolves to `process.cwd()`
-- That's the source code directory!
+**Value passed?**
+- `projectDir = ''` (empty!)
+- Empty `cwd` → `process.cwd()`
+- Source code dir!
 
 ### 5. Find Original Trigger
-**Where did empty string come from?**
+**Empty string from where?**
 ```typescript
 const context = setupCoreTest(); // Returns { tempDir: '' }
 Project.create('name', context.tempDir); // Accessed before beforeEach!
@@ -65,7 +65,7 @@ Project.create('name', context.tempDir); // Accessed before beforeEach!
 
 ## Adding Stack Traces
 
-When you can't trace manually, add instrumentation:
+Trace manual fail → add instrumentation:
 
 ```typescript
 // Before the problematic operation
@@ -82,7 +82,7 @@ async function gitInit(directory: string) {
 }
 ```
 
-**Critical:** Use `console.error()` in tests (not logger - may not show)
+**Critical:** Use `console.error()` in tests (logger may not show)
 
 **Run and capture:**
 ```bash
@@ -90,15 +90,15 @@ npm test 2>&1 | grep 'DEBUG git init'
 ```
 
 **Analyze stack traces:**
-- Look for test file names
-- Find the line number triggering the call
-- Identify the pattern (same test? same parameter?)
+- Look test file names
+- Find line num triggering call
+- ID pattern (same test? same param?)
 
 ## Finding Which Test Causes Pollution
 
-If something appears during tests but you don't know which test:
+Something appears in tests, which test unknown:
 
-Use the bisection script `find-polluter.sh` in this directory:
+Use bisection script `find-polluter.sh` this dir:
 
 ```bash
 ./find-polluter.sh '.git' 'src/**/*.test.ts'
@@ -111,21 +111,21 @@ Runs tests one-by-one, stops at first polluter. See script for usage.
 **Symptom:** `.git` created in `packages/core/` (source code)
 
 **Trace chain:**
-1. `git init` runs in `process.cwd()` ← empty cwd parameter
-2. WorktreeManager called with empty projectDir
+1. `git init` runs in `process.cwd()` ← empty cwd param
+2. WorktreeManager called empty projectDir
 3. Session.create() passed empty string
 4. Test accessed `context.tempDir` before beforeEach
 5. setupCoreTest() returns `{ tempDir: '' }` initially
 
-**Root cause:** Top-level variable initialization accessing empty value
+**Root cause:** Top-level var init accessing empty value
 
-**Fix:** Made tempDir a getter that throws if accessed before beforeEach
+**Fix:** tempDir → getter, throw if accessed before beforeEach
 
 **Also added defense-in-depth:**
-- Layer 1: Project.create() validates directory
+- Layer 1: Project.create() validates dir
 - Layer 2: WorkspaceManager validates not empty
 - Layer 3: NODE_ENV guard refuses git init outside tmpdir
-- Layer 4: Stack trace logging before git init
+- Layer 4: Stack trace log before git init
 
 ## Key Principle
 
@@ -151,19 +151,19 @@ digraph principle {
 }
 ```
 
-**NEVER fix just where the error appears.** Trace back to find the original trigger.
+**NEVER fix just where error appears.** Trace back → original trigger.
 
 ## Stack Trace Tips
 
-**In tests:** Use `console.error()` not logger - logger may be suppressed
-**Before operation:** Log before the dangerous operation, not after it fails
-**Include context:** Directory, cwd, environment variables, timestamps
-**Capture stack:** `new Error().stack` shows complete call chain
+**In tests:** Use `console.error()` not logger — logger may suppress
+**Before operation:** Log before dangerous op, not after fail
+**Include context:** Dir, cwd, env vars, timestamps
+**Capture stack:** `new Error().stack` shows full call chain
 
 ## Real-World Impact
 
-From debugging session (2025-10-03):
-- Found root cause through 5-level trace
-- Fixed at source (getter validation)
-- Added 4 layers of defense
-- 1847 tests passed, zero pollution
+Debug session (2025-10-03):
+- Root cause via 5-level trace
+- Fix at source (getter validation)
+- 4 defense layers
+- 1847 tests pass, zero pollution

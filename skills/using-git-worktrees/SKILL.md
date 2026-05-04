@@ -7,15 +7,15 @@ description: Use when starting feature work that needs isolation from current wo
 
 ## Overview
 
-Git worktrees create isolated workspaces sharing the same repository, allowing work on multiple branches simultaneously without switching.
+Git worktrees = isolated workspaces share same repo. Work multiple branches simultaneously, no switching.
 
-**Core principle:** Systematic directory selection + safety verification = reliable isolation.
+**Core principle:** Systematic dir selection + safety verify = reliable isolation.
 
 **Announce at start:** "I'm using the using-git-worktrees skill to set up an isolated workspace."
 
 ## Directory Selection Process
 
-Follow this priority order:
+Priority order:
 
 ### 1. Check Existing Directories
 
@@ -25,7 +25,7 @@ ls -d .worktrees 2>/dev/null     # Preferred (hidden)
 ls -d worktrees 2>/dev/null      # Alternative
 ```
 
-**If found:** Use that directory. If both exist, `.worktrees` wins.
+**If found:** Use it. Both exist → `.worktrees` wins.
 
 ### 2. Check CLAUDE.md
 
@@ -33,11 +33,11 @@ ls -d worktrees 2>/dev/null      # Alternative
 grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 ```
 
-**If preference specified:** Use it without asking.
+**If preference specified:** Use, no ask.
 
 ### 3. Ask User
 
-If no directory exists and no CLAUDE.md preference:
+No dir + no CLAUDE.md preference:
 
 ```
 No worktree directory found. Where should I create worktrees?
@@ -52,7 +52,7 @@ Which would you prefer?
 
 ### For Project-Local Directories (.worktrees or worktrees)
 
-**MUST verify directory is ignored before creating worktree:**
+**MUST verify dir ignored before creating worktree:**
 
 ```bash
 # Check if directory is ignored (respects local, global, and system gitignore)
@@ -61,16 +61,16 @@ git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/d
 
 **If NOT ignored:**
 
-Per Jesse's rule "Fix broken things immediately":
-1. Add appropriate line to .gitignore
-2. Commit the change
-3. Proceed with worktree creation
+Per Jesse rule "Fix broken things immediately":
+1. Add line to .gitignore
+2. Commit change
+3. Proceed worktree creation
 
-**Why critical:** Prevents accidentally committing worktree contents to repository.
+**Why critical:** Prevent accidental commit of worktree contents to repo.
 
 ### For Global Directory (~/.config/superpowers/worktrees)
 
-No .gitignore verification needed - outside project entirely.
+No .gitignore verify needed — outside project.
 
 ## Creation Steps
 
@@ -100,7 +100,7 @@ cd "$path"
 
 ### 3. Run Project Setup
 
-Auto-detect and run appropriate setup:
+Auto-detect + run setup:
 
 ```bash
 # Node.js
@@ -119,7 +119,7 @@ if [ -f go.mod ]; then go mod download; fi
 
 ### 4. Verify Clean Baseline
 
-Run tests to ensure worktree starts clean:
+Run tests, ensure clean start:
 
 ```bash
 # Examples - use project-appropriate command
@@ -129,9 +129,9 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures, ask whether to proceed or investigate.
+**Tests fail:** Report, ask proceed or investigate.
 
-**If tests pass:** Report ready.
+**Tests pass:** Report ready.
 
 ### 5. Report Location
 
@@ -157,22 +157,22 @@ Ready to implement <feature-name>
 
 ### Skipping ignore verification
 
-- **Problem:** Worktree contents get tracked, pollute git status
-- **Fix:** Always use `git check-ignore` before creating project-local worktree
+- **Problem:** Worktree contents tracked → pollute git status
+- **Fix:** Always `git check-ignore` before creating project-local worktree
 
 ### Assuming directory location
 
-- **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > CLAUDE.md > ask
+- **Problem:** Inconsistency, violate project conventions
+- **Fix:** Priority: existing > CLAUDE.md > ask
 
 ### Proceeding with failing tests
 
-- **Problem:** Can't distinguish new bugs from pre-existing issues
+- **Problem:** Can't distinguish new bugs from pre-existing
 - **Fix:** Report failures, get explicit permission to proceed
 
 ### Hardcoding setup commands
 
-- **Problem:** Breaks on projects using different tools
+- **Problem:** Breaks on different tools
 - **Fix:** Auto-detect from project files (package.json, etc.)
 
 ## Example Workflow
@@ -194,25 +194,25 @@ Ready to implement auth feature
 ## Red Flags
 
 **Never:**
-- Create worktree without verifying it's ignored (project-local)
-- Skip baseline test verification
-- Proceed with failing tests without asking
-- Assume directory location when ambiguous
+- Create worktree without verify ignored (project-local)
+- Skip baseline test verify
+- Proceed failing tests no ask
+- Assume dir location when ambiguous
 - Skip CLAUDE.md check
 
 **Always:**
-- Follow directory priority: existing > CLAUDE.md > ask
-- Verify directory is ignored for project-local
-- Auto-detect and run project setup
+- Follow dir priority: existing > CLAUDE.md > ask
+- Verify dir ignored for project-local
+- Auto-detect + run project setup
 - Verify clean test baseline
 
 ## Integration
 
 **Called by:**
-- **brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
-- **subagent-driven-development** - REQUIRED before executing any tasks
-- **executing-plans** - REQUIRED before executing any tasks
+- **brainstorming** (Phase 4) — REQUIRED when design approved + implementation follows
+- **subagent-driven-development** — REQUIRED before executing tasks
+- **executing-plans** — REQUIRED before executing tasks
 - Any skill needing isolated workspace
 
 **Pairs with:**
-- **finishing-a-development-branch** - REQUIRED for cleanup after work complete
+- **finishing-a-development-branch** — REQUIRED for cleanup after work complete

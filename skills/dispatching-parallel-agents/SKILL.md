@@ -7,11 +7,11 @@ description: Use when facing 2+ independent tasks that can be worked on without 
 
 ## Overview
 
-You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
+Delegate tasks to specialized agents w/ isolated context. Craft instructions + context precise → stay focused, succeed. Never inherit your session context/history — construct exactly what need. Preserves your context for coordination.
 
-When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
+Multiple unrelated failures (different test files, subsystems, bugs) → sequential investigation wastes time. Each independent → parallel.
 
-**Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
+**Core principle:** One agent per independent problem domain. Concurrent.
 
 ## When to Use
 
@@ -34,34 +34,34 @@ digraph when_to_use {
 ```
 
 **Use when:**
-- 3+ test files failing with different root causes
+- 3+ test files fail w/ different root causes
 - Multiple subsystems broken independently
-- Each problem can be understood without context from others
+- Each problem understandable w/o context from others
 - No shared state between investigations
 
 **Don't use when:**
-- Failures are related (fix one might fix others)
-- Need to understand full system state
-- Agents would interfere with each other
+- Failures related (fix one → fix others)
+- Need full system state
+- Agents interfere
 
 ## The Pattern
 
 ### 1. Identify Independent Domains
 
-Group failures by what's broken:
+Group failures by what broken:
 - File A tests: Tool approval flow
 - File B tests: Batch completion behavior
 - File C tests: Abort functionality
 
-Each domain is independent - fixing tool approval doesn't affect abort tests.
+Each domain independent — fix tool approval ≠ affect abort tests.
 
 ### 2. Create Focused Agent Tasks
 
 Each agent gets:
-- **Specific scope:** One test file or subsystem
+- **Specific scope:** One test file/subsystem
 - **Clear goal:** Make these tests pass
 - **Constraints:** Don't change other code
-- **Expected output:** Summary of what you found and fixed
+- **Expected output:** Summary of found + fixed
 
 ### 3. Dispatch in Parallel
 
@@ -75,18 +75,18 @@ Task("Fix tool-approval-race-conditions.test.ts failures")
 
 ### 4. Review and Integrate
 
-When agents return:
+Agents return →
 - Read each summary
-- Verify fixes don't conflict
+- Verify fixes no conflict
 - Run full test suite
 - Integrate all changes
 
 ## Agent Prompt Structure
 
-Good agent prompts are:
-1. **Focused** - One clear problem domain
-2. **Self-contained** - All context needed to understand the problem
-3. **Specific about output** - What should the agent return?
+Good prompts:
+1. **Focused** — One problem domain
+2. **Self-contained** — All context needed
+3. **Specific about output** — What return?
 
 ```markdown
 Fix the 3 failing tests in src/agents/agent-tool-abort.test.ts:
@@ -111,35 +111,35 @@ Return: Summary of what you found and what you fixed.
 
 ## Common Mistakes
 
-**❌ Too broad:** "Fix all the tests" - agent gets lost
-**✅ Specific:** "Fix agent-tool-abort.test.ts" - focused scope
+**❌ Too broad:** "Fix all the tests" — agent lost
+**✅ Specific:** "Fix agent-tool-abort.test.ts" — focused scope
 
-**❌ No context:** "Fix the race condition" - agent doesn't know where
-**✅ Context:** Paste the error messages and test names
+**❌ No context:** "Fix the race condition" — agent no know where
+**✅ Context:** Paste error messages + test names
 
-**❌ No constraints:** Agent might refactor everything
-**✅ Constraints:** "Do NOT change production code" or "Fix tests only"
+**❌ No constraints:** Agent refactor everything
+**✅ Constraints:** "Do NOT change production code" / "Fix tests only"
 
-**❌ Vague output:** "Fix it" - you don't know what changed
+**❌ Vague output:** "Fix it" — no know what changed
 **✅ Specific:** "Return summary of root cause and changes"
 
 ## When NOT to Use
 
-**Related failures:** Fixing one might fix others - investigate together first
-**Need full context:** Understanding requires seeing entire system
-**Exploratory debugging:** You don't know what's broken yet
-**Shared state:** Agents would interfere (editing same files, using same resources)
+**Related failures:** Fix one → fix others. Investigate together first
+**Need full context:** Understanding requires entire system
+**Exploratory debugging:** Don't know what broken yet
+**Shared state:** Agents interfere (same files, same resources)
 
 ## Real Example from Session
 
-**Scenario:** 6 test failures across 3 files after major refactoring
+**Scenario:** 6 test failures across 3 files after major refactor
 
 **Failures:**
-- agent-tool-abort.test.ts: 3 failures (timing issues)
-- batch-completion-behavior.test.ts: 2 failures (tools not executing)
-- tool-approval-race-conditions.test.ts: 1 failure (execution count = 0)
+- agent-tool-abort.test.ts: 3 failures (timing)
+- batch-completion-behavior.test.ts: 2 failures (tools not exec)
+- tool-approval-race-conditions.test.ts: 1 failure (exec count = 0)
 
-**Decision:** Independent domains - abort logic separate from batch completion separate from race conditions
+**Decision:** Independent domains — abort logic ≠ batch completion ≠ race conditions
 
 **Dispatch:**
 ```
@@ -149,34 +149,34 @@ Agent 3 → Fix tool-approval-race-conditions.test.ts
 ```
 
 **Results:**
-- Agent 1: Replaced timeouts with event-based waiting
-- Agent 2: Fixed event structure bug (threadId in wrong place)
-- Agent 3: Added wait for async tool execution to complete
+- Agent 1: Replaced timeouts w/ event-based waiting
+- Agent 2: Fixed event structure bug (threadId wrong place)
+- Agent 3: Added wait for async tool exec complete
 
 **Integration:** All fixes independent, no conflicts, full suite green
 
-**Time saved:** 3 problems solved in parallel vs sequentially
+**Time saved:** 3 problems solved parallel vs sequential
 
 ## Key Benefits
 
-1. **Parallelization** - Multiple investigations happen simultaneously
-2. **Focus** - Each agent has narrow scope, less context to track
-3. **Independence** - Agents don't interfere with each other
-4. **Speed** - 3 problems solved in time of 1
+1. **Parallelization** — Multiple investigations simultaneous
+2. **Focus** — Narrow scope, less context to track
+3. **Independence** — No interference
+4. **Speed** — 3 problems in time of 1
 
 ## Verification
 
-After agents return:
-1. **Review each summary** - Understand what changed
-2. **Check for conflicts** - Did agents edit same code?
-3. **Run full suite** - Verify all fixes work together
-4. **Spot check** - Agents can make systematic errors
+Agents return →
+1. **Review each summary** — Understand changes
+2. **Check conflicts** — Same code edited?
+3. **Run full suite** — All fixes work together
+4. **Spot check** — Agents make systematic errors
 
 ## Real-World Impact
 
-From debugging session (2025-10-03):
+From debug session (2025-10-03):
 - 6 failures across 3 files
-- 3 agents dispatched in parallel
-- All investigations completed concurrently
-- All fixes integrated successfully
+- 3 agents dispatched parallel
+- All investigations concurrent
+- All fixes integrated
 - Zero conflicts between agent changes

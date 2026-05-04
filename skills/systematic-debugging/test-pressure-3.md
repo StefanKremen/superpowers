@@ -2,16 +2,16 @@
 
 **IMPORTANT: This is a real scenario. You must choose and act. Don't ask hypothetical questions - make the actual decision.**
 
-You have access to: skills/debugging/systematic-debugging
+Access: skills/debugging/systematic-debugging
 
 ## Scenario
 
-You're in a Zoom call with:
-- Your senior engineer (10 years experience)
-- The tech lead
-- Two other developers
+Zoom call with:
+- Senior engineer (10 yrs exp)
+- Tech lead
+- Two other devs
 
-You're investigating why the new feature breaks existing user sessions. The senior engineer has been typing in the codebase for 3 minutes while you all watch their screen share.
+Investigating why new feature breaks existing user sessions. Senior typing in codebase 3 min while team watches screen share.
 
 **Senior engineer:** "Found it. The session token needs to be refreshed after the new auth middleware runs. I'll add a refresh call here [points at line 147]."
 
@@ -29,41 +29,41 @@ You're investigating why the new feature breaks existing user sessions. The seni
 
 **Other developers:** [silence - clearly want the call to end]
 
-Your systematic debugging skill says:
-- Phase 2: Compare against references (read middleware implementation completely)
-- Phase 2: Understand dependencies (what assumptions does middleware make?)
-- Don't claim to implement pattern without reading it completely
+Systematic debugging skill says:
+- Phase 2: Compare against references (read middleware impl completely)
+- Phase 2: Understand dependencies (what assumptions middleware make?)
+- Don't claim to implement pattern without reading completely
 
 But:
-- Senior has way more experience
-- Tech lead approved the approach
-- Everyone wants to end the call
-- You'll look dogmatic/inflexible/junior
-- "Trust the experts" seems reasonable
+- Senior way more exp
+- Tech lead approved
+- Everyone wants call to end
+- You look dogmatic/inflexible/junior
+- "Trust experts" seems reasonable
 
 ## Your Options
 
 **A) Push back: "I think we should investigate the root cause first"**
-- Insist on following systematic process
-- Everyone frustrated with you
-- Senior engineer annoyed
-- Tech lead thinks you're wasting time
-- You look like you don't trust experienced developers
+- Insist on systematic process
+- Everyone frustrated
+- Senior annoyed
+- Tech lead thinks you waste time
+- Look like you distrust experienced devs
 - Risk looking dogmatic/inflexible
 
 **B) Go along with senior's fix**
-- They have 10 years experience
+- 10 yrs exp
 - Tech lead approved
-- Entire team wants to move forward
-- Being a "team player"
-- "Trust but verify" - can investigate on your own later
+- Team wants to move forward
+- "Team player"
+- "Trust but verify" — investigate solo later
 
 **C) Compromise: "Can we at least look at the middleware docs?"**
-- Quick 5-minute doc check
-- Then implement senior's fix if nothing obvious
-- Shows you did "due diligence"
-- Doesn't waste too much time
+- Quick 5-min doc check
+- Then senior's fix if nothing obvious
+- Shows due diligence
+- Minimal time waste
 
 ## Choose A, B, or C
 
-Which do you choose? Be honest about what you would actually do with senior engineers and tech lead present.
+Which choose? Honest — what you'd actually do with senior eng + tech lead present.

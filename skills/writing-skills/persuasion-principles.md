@@ -2,23 +2,23 @@
 
 ## Overview
 
-LLMs respond to the same persuasion principles as humans. Understanding this psychology helps you design more effective skills - not to manipulate, but to ensure critical practices are followed even under pressure.
+LLMs respond to same persuasion principles as humans. Psychology helps design better skills — not manipulate, but ensure critical practices followed under pressure.
 
-**Research foundation:** Meincke et al. (2025) tested 7 persuasion principles with N=28,000 AI conversations. Persuasion techniques more than doubled compliance rates (33% → 72%, p < .001).
+**Research foundation:** Meincke et al. (2025) tested 7 persuasion principles, N=28,000 AI conversations. Persuasion >2x compliance (33% → 72%, p < .001).
 
 ## The Seven Principles
 
 ### 1. Authority
-**What it is:** Deference to expertise, credentials, or official sources.
+**What it is:** Defer to expertise, credentials, official sources.
 
 **How it works in skills:**
-- Imperative language: "YOU MUST", "Never", "Always"
-- Non-negotiable framing: "No exceptions"
-- Eliminates decision fatigue and rationalization
+- Imperative: "YOU MUST", "Never", "Always"
+- Non-negotiable: "No exceptions"
+- Kills decision fatigue + rationalization
 
 **When to use:**
-- Discipline-enforcing skills (TDD, verification requirements)
-- Safety-critical practices
+- Discipline skills (TDD, verification)
+- Safety-critical
 - Established best practices
 
 **Example:**
@@ -28,17 +28,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 2. Commitment
-**What it is:** Consistency with prior actions, statements, or public declarations.
+**What it is:** Consistency w/ prior actions, statements, public declarations.
 
 **How it works in skills:**
 - Require announcements: "Announce skill usage"
 - Force explicit choices: "Choose A, B, or C"
-- Use tracking: TodoWrite for checklists
+- Tracking: TodoWrite checklists
 
 **When to use:**
-- Ensuring skills are actually followed
+- Ensure skills followed
 - Multi-step processes
-- Accountability mechanisms
+- Accountability
 
 **Example:**
 ```markdown
@@ -50,14 +50,14 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 **What it is:** Urgency from time limits or limited availability.
 
 **How it works in skills:**
-- Time-bound requirements: "Before proceeding"
-- Sequential dependencies: "Immediately after X"
-- Prevents procrastination
+- Time-bound: "Before proceeding"
+- Sequential deps: "Immediately after X"
+- Stops procrastination
 
 **When to use:**
-- Immediate verification requirements
-- Time-sensitive workflows
-- Preventing "I'll do it later"
+- Immediate verification
+- Time-sensitive flows
+- Stop "later" drift
 
 **Example:**
 ```markdown
@@ -66,17 +66,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 4. Social Proof
-**What it is:** Conformity to what others do or what's considered normal.
+**What it is:** Conform to what others do / what's normal.
 
 **How it works in skills:**
-- Universal patterns: "Every time", "Always"
+- Universal: "Every time", "Always"
 - Failure modes: "X without Y = failure"
-- Establishes norms
+- Sets norms
 
 **When to use:**
-- Documenting universal practices
-- Warning about common failures
-- Reinforcing standards
+- Universal practices
+- Warn common failures
+- Reinforce standards
 
 **Example:**
 ```markdown
@@ -85,16 +85,16 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 5. Unity
-**What it is:** Shared identity, "we-ness", in-group belonging.
+**What it is:** Shared identity, "we-ness", in-group.
 
 **How it works in skills:**
-- Collaborative language: "our codebase", "we're colleagues"
+- Collaborative: "our codebase", "we're colleagues"
 - Shared goals: "we both want quality"
 
 **When to use:**
-- Collaborative workflows
-- Establishing team culture
-- Non-hierarchical practices
+- Collaborative flows
+- Team culture
+- Non-hierarchical
 
 **Example:**
 ```markdown
@@ -103,25 +103,25 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 6. Reciprocity
-**What it is:** Obligation to return benefits received.
+**What it is:** Obligation to return benefits.
 
 **How it works:**
-- Use sparingly - can feel manipulative
-- Rarely needed in skills
+- Use sparingly — feels manipulative
+- Rarely needed
 
 **When to avoid:**
-- Almost always (other principles more effective)
+- Almost always (others stronger)
 
 ### 7. Liking
-**What it is:** Preference for cooperating with those we like.
+**What it is:** Prefer cooperating w/ those we like.
 
 **How it works:**
 - **DON'T USE for compliance**
-- Conflicts with honest feedback culture
+- Breaks honest feedback
 - Creates sycophancy
 
 **When to avoid:**
-- Always for discipline enforcement
+- Always for discipline
 
 ## Principle Combinations by Skill Type
 
@@ -134,54 +134,54 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 
 ## Why This Works: The Psychology
 
-**Bright-line rules reduce rationalization:**
-- "YOU MUST" removes decision fatigue
-- Absolute language eliminates "is this an exception?" questions
-- Explicit anti-rationalization counters close specific loopholes
+**Bright-line rules cut rationalization:**
+- "YOU MUST" kills decision fatigue
+- Absolute language → no "is this exception?"
+- Explicit anti-rationalization closes loopholes
 
-**Implementation intentions create automatic behavior:**
-- Clear triggers + required actions = automatic execution
-- "When X, do Y" more effective than "generally do Y"
-- Reduces cognitive load on compliance
+**Implementation intentions = automatic behavior:**
+- Clear triggers + required actions → auto execution
+- "When X, do Y" beats "generally do Y"
+- Less cognitive load on compliance
 
-**LLMs are parahuman:**
-- Trained on human text containing these patterns
-- Authority language precedes compliance in training data
-- Commitment sequences (statement → action) frequently modeled
-- Social proof patterns (everyone does X) establish norms
+**LLMs parahuman:**
+- Trained on human text w/ these patterns
+- Authority language precedes compliance in training
+- Commitment sequences (statement → action) modeled often
+- Social proof (everyone does X) sets norms
 
 ## Ethical Use
 
 **Legitimate:**
-- Ensuring critical practices are followed
-- Creating effective documentation
-- Preventing predictable failures
+- Enforce critical practices
+- Effective docs
+- Prevent predictable failures
 
 **Illegitimate:**
-- Manipulating for personal gain
-- Creating false urgency
+- Manipulate for personal gain
+- Fake urgency
 - Guilt-based compliance
 
-**The test:** Would this technique serve the user's genuine interests if they fully understood it?
+**The test:** Would technique serve user's real interests if they understood it?
 
 ## Research Citations
 
 **Cialdini, R. B. (2021).** *Influence: The Psychology of Persuasion (New and Expanded).* Harper Business.
-- Seven principles of persuasion
+- Seven persuasion principles
 - Empirical foundation for influence research
 
 **Meincke, L., Shapiro, D., Duckworth, A. L., Mollick, E., Mollick, L., & Cialdini, R. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. University of Pennsylvania.
-- Tested 7 principles with N=28,000 LLM conversations
-- Compliance increased 33% → 72% with persuasion techniques
-- Authority, commitment, scarcity most effective
-- Validates parahuman model of LLM behavior
+- 7 principles, N=28,000 LLM conversations
+- Compliance 33% → 72% w/ persuasion
+- Authority, commitment, scarcity strongest
+- Validates parahuman LLM model
 
 ## Quick Reference
 
-When designing a skill, ask:
+When designing skill, ask:
 
-1. **What type is it?** (Discipline vs. guidance vs. reference)
-2. **What behavior am I trying to change?**
-3. **Which principle(s) apply?** (Usually authority + commitment for discipline)
-4. **Am I combining too many?** (Don't use all seven)
-5. **Is this ethical?** (Serves user's genuine interests?)
+1. **What type?** (Discipline vs. guidance vs. reference)
+2. **What behavior to change?**
+3. **Which principle(s)?** (Usually authority + commitment for discipline)
+4. **Combining too many?** (Don't use all seven)
+5. **Ethical?** (Serves user's real interests?)

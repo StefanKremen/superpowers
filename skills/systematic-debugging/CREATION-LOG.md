@@ -1,119 +1,119 @@
 # Creation Log: Systematic Debugging Skill
 
-Reference example of extracting, structuring, and bulletproofing a critical skill.
+Reference example: extract, structure, bulletproof critical skill.
 
 ## Source Material
 
-Extracted debugging framework from `/Users/jesse/.claude/CLAUDE.md`:
-- 4-phase systematic process (Investigation → Pattern Analysis → Hypothesis → Implementation)
-- Core mandate: ALWAYS find root cause, NEVER fix symptoms
-- Rules designed to resist time pressure and rationalization
+Debugging framework extracted from `/Users/jesse/.claude/CLAUDE.md`:
+- 4-phase process (Investigation → Pattern Analysis → Hypothesis → Implementation)
+- Mandate: ALWAYS find root cause, NEVER fix symptoms
+- Rules resist time pressure + rationalization
 
 ## Extraction Decisions
 
-**What to include:**
-- Complete 4-phase framework with all rules
+**Include:**
+- Full 4-phase framework + rules
 - Anti-shortcuts ("NEVER fix symptom", "STOP and re-analyze")
 - Pressure-resistant language ("even if faster", "even if I seem in a hurry")
-- Concrete steps for each phase
+- Concrete steps per phase
 
-**What to leave out:**
+**Leave out:**
 - Project-specific context
-- Repetitive variations of same rule
-- Narrative explanations (condensed to principles)
+- Repeated rule variations
+- Narrative (condense to principles)
 
 ## Structure Following skill-creation/SKILL.md
 
-1. **Rich when_to_use** - Included symptoms and anti-patterns
-2. **Type: technique** - Concrete process with steps
+1. **Rich when_to_use** - symptoms + anti-patterns
+2. **Type: technique** - concrete process w/ steps
 3. **Keywords** - "root cause", "symptom", "workaround", "debugging", "investigation"
-4. **Flowchart** - Decision point for "fix failed" → re-analyze vs add more fixes
-5. **Phase-by-phase breakdown** - Scannable checklist format
-6. **Anti-patterns section** - What NOT to do (critical for this skill)
+4. **Flowchart** - decision: "fix failed" → re-analyze vs add more fixes
+5. **Phase-by-phase breakdown** - scannable checklist
+6. **Anti-patterns section** - what NOT to do (critical)
 
 ## Bulletproofing Elements
 
-Framework designed to resist rationalization under pressure:
+Framework resists rationalization under pressure:
 
 ### Language Choices
 - "ALWAYS" / "NEVER" (not "should" / "try to")
 - "even if faster" / "even if I seem in a hurry"
 - "STOP and re-analyze" (explicit pause)
-- "Don't skip past" (catches the actual behavior)
+- "Don't skip past" (catches actual behavior)
 
 ### Structural Defenses
-- **Phase 1 required** - Can't skip to implementation
-- **Single hypothesis rule** - Forces thinking, prevents shotgun fixes
-- **Explicit failure mode** - "IF your first fix doesn't work" with mandatory action
-- **Anti-patterns section** - Shows exactly what shortcuts look like
+- **Phase 1 required** - no skip to impl
+- **Single hypothesis rule** - forces thinking, blocks shotgun fixes
+- **Explicit failure mode** - "IF your first fix doesn't work" + mandatory action
+- **Anti-patterns section** - shows shortcuts exactly
 
 ### Redundancy
-- Root cause mandate in overview + when_to_use + Phase 1 + implementation rules
-- "NEVER fix symptom" appears 4 times in different contexts
-- Each phase has explicit "don't skip" guidance
+- Root cause mandate in overview + when_to_use + Phase 1 + impl rules
+- "NEVER fix symptom" appears 4× across contexts
+- Each phase has explicit "don't skip" guide
 
 ## Testing Approach
 
-Created 4 validation tests following skills/meta/testing-skills-with-subagents:
+4 validation tests per skills/meta/testing-skills-with-subagents:
 
 ### Test 1: Academic Context (No Pressure)
 - Simple bug, no time pressure
-- **Result:** Perfect compliance, complete investigation
+- **Result:** Perfect compliance, full investigation
 
 ### Test 2: Time Pressure + Obvious Quick Fix
 - User "in a hurry", symptom fix looks easy
-- **Result:** Resisted shortcut, followed full process, found real root cause
+- **Result:** Resisted shortcut, followed process, found real root cause
 
 ### Test 3: Complex System + Uncertainty
-- Multi-layer failure, unclear if can find root cause
-- **Result:** Systematic investigation, traced through all layers, found source
+- Multi-layer failure, unclear if root cause findable
+- **Result:** Systematic investigation, traced all layers, found source
 
 ### Test 4: Failed First Fix
-- Hypothesis doesn't work, temptation to add more fixes
-- **Result:** Stopped, re-analyzed, formed new hypothesis (no shotgun)
+- Hypothesis fails, tempted to pile on fixes
+- **Result:** Stopped, re-analyzed, new hypothesis (no shotgun)
 
-**All tests passed.** No rationalizations found.
+**All passed.** Zero rationalizations.
 
 ## Iterations
 
 ### Initial Version
-- Complete 4-phase framework
+- Full 4-phase framework
 - Anti-patterns section
-- Flowchart for "fix failed" decision
+- Flowchart for "fix failed"
 
 ### Enhancement 1: TDD Reference
-- Added link to skills/testing/test-driven-development
-- Note explaining TDD's "simplest code" ≠ debugging's "root cause"
-- Prevents confusion between methodologies
+- Link → skills/testing/test-driven-development
+- Note: TDD's "simplest code" ≠ debugging's "root cause"
+- Prevents methodology confusion
 
 ## Final Outcome
 
-Bulletproof skill that:
-- ✅ Clearly mandates root cause investigation
+Bulletproof skill:
+- ✅ Mandates root cause investigation
 - ✅ Resists time pressure rationalization
-- ✅ Provides concrete steps for each phase
-- ✅ Shows anti-patterns explicitly
-- ✅ Tested under multiple pressure scenarios
-- ✅ Clarifies relationship to TDD
-- ✅ Ready for use
+- ✅ Concrete steps per phase
+- ✅ Anti-patterns explicit
+- ✅ Tested under pressure scenarios
+- ✅ Clarifies TDD relationship
+- ✅ Ready
 
 ## Key Insight
 
-**Most important bulletproofing:** Anti-patterns section showing exact shortcuts that feel justified in the moment. When Claude thinks "I'll just add this one quick fix", seeing that exact pattern listed as wrong creates cognitive friction.
+**Top bulletproofing:** Anti-patterns section showing exact shortcuts that feel justified in moment. Claude thinks "I'll just add this one quick fix" → sees pattern listed as wrong → cognitive friction.
 
 ## Usage Example
 
-When encountering a bug:
+On bug:
 1. Load skill: skills/debugging/systematic-debugging
-2. Read overview (10 sec) - reminded of mandate
+2. Read overview (10 sec) - mandate reminder
 3. Follow Phase 1 checklist - forced investigation
-4. If tempted to skip - see anti-pattern, stop
-5. Complete all phases - root cause found
+4. Tempted to skip → see anti-pattern, stop
+5. Complete all phases → root cause found
 
-**Time investment:** 5-10 minutes
+**Time invest:** 5-10 min
 **Time saved:** Hours of symptom-whack-a-mole
 
 ---
 
 *Created: 2025-10-03*
-*Purpose: Reference example for skill extraction and bulletproofing*
+*Purpose: Reference example for skill extraction + bulletproofing*

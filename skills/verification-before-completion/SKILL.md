@@ -7,11 +7,11 @@ description: Use when about to claim work is complete, fixed, or passing, before
 
 ## Overview
 
-Claiming work is complete without verification is dishonesty, not efficiency.
+Claim work complete without verify = dishonesty, not efficiency.
 
 **Core principle:** Evidence before claims, always.
 
-**Violating the letter of this rule is violating the spirit of this rule.**
+**Violate letter of rule = violate spirit of rule.**
 
 ## The Iron Law
 
@@ -19,7 +19,7 @@ Claiming work is complete without verification is dishonesty, not efficiency.
 NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 ```
 
-If you haven't run the verification command in this message, you cannot claim it passes.
+No run verification cmd this message → no claim pass.
 
 ## The Gate Function
 
@@ -51,14 +51,14 @@ Skip any step = lying, not verifying
 
 ## Red Flags - STOP
 
-- Using "should", "probably", "seems to"
-- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
-- About to commit/push/PR without verification
-- Trusting agent success reports
-- Relying on partial verification
-- Thinking "just this once"
-- Tired and wanting work over
-- **ANY wording implying success without having run verification**
+- Use "should", "probably", "seems to"
+- Express satisfaction before verify ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verify
+- Trust agent success reports
+- Rely on partial verify
+- Think "just this once"
+- Tired, want work over
+- **ANY wording imply success without run verify**
 
 ## Rationalization Prevention
 
@@ -108,9 +108,9 @@ Skip any step = lying, not verifying
 ## Why This Matters
 
 From 24 failure memories:
-- your human partner said "I don't believe you" - trust broken
-- Undefined functions shipped - would crash
-- Missing requirements shipped - incomplete features
+- human partner said "I don't believe you" → trust broken
+- Undefined fns shipped → would crash
+- Missing requirements shipped → incomplete features
 - Time wasted on false completion → redirect → rework
 - Violates: "Honesty is a core value. If you lie, you'll be replaced."
 
@@ -120,20 +120,20 @@ From 24 failure memories:
 - ANY variation of success/completion claims
 - ANY expression of satisfaction
 - ANY positive statement about work state
-- Committing, PR creation, task completion
-- Moving to next task
-- Delegating to agents
+- Commit, PR create, task complete
+- Move to next task
+- Delegate to agents
 
-**Rule applies to:**
+**Rule apply to:**
 - Exact phrases
-- Paraphrases and synonyms
+- Paraphrases, synonyms
 - Implications of success
-- ANY communication suggesting completion/correctness
+- ANY comm suggest completion/correctness
 
 ## The Bottom Line
 
 **No shortcuts for verification.**
 
-Run the command. Read the output. THEN claim the result.
+Run cmd. Read output. THEN claim result.
 
-This is non-negotiable.
+Non-negotiable.

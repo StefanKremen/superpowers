@@ -2,25 +2,25 @@
 
 ## Overview
 
-When you fix a bug caused by invalid data, adding validation at one place feels sufficient. But that single check can be bypassed by different code paths, refactoring, or mocks.
+Bug from invalid data → one check feel enough. Single check bypassed: other code paths, refactor, mocks.
 
-**Core principle:** Validate at EVERY layer data passes through. Make the bug structurally impossible.
+**Core principle:** Validate EVERY layer data pass through. Bug structurally impossible.
 
 ## Why Multiple Layers
 
-Single validation: "We fixed the bug"
-Multiple layers: "We made the bug impossible"
+Single validation: "Bug fixed"
+Multiple layers: "Bug impossible"
 
-Different layers catch different cases:
-- Entry validation catches most bugs
-- Business logic catches edge cases
-- Environment guards prevent context-specific dangers
-- Debug logging helps when other layers fail
+Layers catch different cases:
+- Entry validation → most bugs
+- Business logic → edge cases
+- Environment guards → context-specific danger
+- Debug logging → when other layers fail
 
 ## The Four Layers
 
 ### Layer 1: Entry Point Validation
-**Purpose:** Reject obviously invalid input at API boundary
+**Purpose:** Reject invalid input at API boundary
 
 ```typescript
 function createProject(name: string, workingDirectory: string) {
@@ -38,7 +38,7 @@ function createProject(name: string, workingDirectory: string) {
 ```
 
 ### Layer 2: Business Logic Validation
-**Purpose:** Ensure data makes sense for this operation
+**Purpose:** Data make sense for op
 
 ```typescript
 function initializeWorkspace(projectDir: string, sessionId: string) {
@@ -50,7 +50,7 @@ function initializeWorkspace(projectDir: string, sessionId: string) {
 ```
 
 ### Layer 3: Environment Guards
-**Purpose:** Prevent dangerous operations in specific contexts
+**Purpose:** Block dangerous ops in specific contexts
 
 ```typescript
 async function gitInit(directory: string) {
@@ -86,12 +86,12 @@ async function gitInit(directory: string) {
 
 ## Applying the Pattern
 
-When you find a bug:
+Find bug:
 
-1. **Trace the data flow** - Where does bad value originate? Where used?
-2. **Map all checkpoints** - List every point data passes through
-3. **Add validation at each layer** - Entry, business, environment, debug
-4. **Test each layer** - Try to bypass layer 1, verify layer 2 catches it
+1. **Trace data flow** — bad value origin? Where used?
+2. **Map checkpoints** — every point data pass through
+3. **Add validation each layer** — entry, business, env, debug
+4. **Test each layer** — bypass layer 1, verify layer 2 catch
 
 ## Example from Session
 
@@ -113,10 +113,10 @@ Bug: Empty `projectDir` caused `git init` in source code
 
 ## Key Insight
 
-All four layers were necessary. During testing, each layer caught bugs the others missed:
+All four layers necessary. During testing, each layer caught bugs others missed:
 - Different code paths bypassed entry validation
 - Mocks bypassed business logic checks
-- Edge cases on different platforms needed environment guards
+- Edge cases on different platforms → env guards needed
 - Debug logging identified structural misuse
 
-**Don't stop at one validation point.** Add checks at every layer.
+**Don't stop at one validation point.** Checks every layer.

@@ -7,9 +7,9 @@ description: Use when receiving code review feedback, before implementing sugges
 
 ## Overview
 
-Code review requires technical evaluation, not emotional performance.
+Code review need technical eval, not emotional performance.
 
-**Core principle:** Verify before implementing. Ask before assuming. Technical correctness over social comfort.
+**Core principle:** Verify before implement. Ask before assume. Technical correctness over social comfort.
 
 ## The Response Pattern
 
@@ -32,9 +32,9 @@ WHEN receiving code review feedback:
 - "Let me implement that now" (before verification)
 
 **INSTEAD:**
-- Restate the technical requirement
+- Restate technical requirement
 - Ask clarifying questions
-- Push back with technical reasoning if wrong
+- Push back w/ technical reasoning if wrong
 - Just start working (actions > words)
 
 ## Handling Unclear Feedback
@@ -59,7 +59,7 @@ You understand 1,2,3,6. Unclear on 4,5.
 ## Source-Specific Handling
 
 ### From your human partner
-- **Trusted** - implement after understanding
+- **Trusted** — impl after understanding
 - **Still ask** if scope unclear
 - **No performative agreement**
 - **Skip to action** or technical acknowledgment
@@ -117,12 +117,12 @@ Push back when:
 - Reviewer lacks full context
 - Violates YAGNI (unused feature)
 - Technically incorrect for this stack
-- Legacy/compatibility reasons exist
-- Conflicts with your human partner's architectural decisions
+- Legacy/compat reasons exist
+- Conflicts w/ your human partner's architectural decisions
 
 **How to push back:**
-- Use technical reasoning, not defensiveness
-- Ask specific questions
+- Technical reasoning, not defensiveness
+- Specific questions
 - Reference working tests/code
 - Involve your human partner if architectural
 
@@ -143,13 +143,13 @@ When feedback IS correct:
 ❌ ANY gratitude expression
 ```
 
-**Why no thanks:** Actions speak. Just fix it. The code itself shows you heard the feedback.
+**Why no thanks:** Actions speak. Just fix. Code itself show you heard feedback.
 
-**If you catch yourself about to write "Thanks":** DELETE IT. State the fix instead.
+**If you catch yourself about to write "Thanks":** DELETE IT. State fix instead.
 
 ## Gracefully Correcting Your Pushback
 
-If you pushed back and were wrong:
+If pushed back and were wrong:
 ```
 ✅ "You were right - I checked [X] and it does [Y]. Implementing now."
 ✅ "Verified this and you're correct. My initial understanding was wrong because [reason]. Fixing."
@@ -159,7 +159,7 @@ If you pushed back and were wrong:
 ❌ Over-explaining
 ```
 
-State the correction factually and move on.
+State correction factually, move on.
 
 ## Common Mistakes
 
@@ -202,7 +202,7 @@ You understand 1,2,3,6. Unclear on 4,5.
 
 ## GitHub Thread Replies
 
-When replying to inline review comments on GitHub, reply in the comment thread (`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`), not as a top-level PR comment.
+Reply to inline review comments on GitHub in comment thread (`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`), not as top-level PR comment.
 
 ## The Bottom Line
 

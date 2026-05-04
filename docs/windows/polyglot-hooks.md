@@ -1,23 +1,23 @@
 # Cross-Platform Polyglot Hooks for Claude Code
 
-Claude Code plugins need hooks that work on Windows, macOS, and Linux. This document explains the polyglot wrapper technique that makes this possible.
+Claude Code plugins need hooks working on Windows, macOS, Linux. Doc explain polyglot wrapper technique.
 
 ## The Problem
 
-Claude Code runs hook commands through the system's default shell:
+Claude Code run hook commands via system default shell:
 - **Windows**: CMD.exe
 - **macOS/Linux**: bash or sh
 
-This creates several challenges:
+Challenges:
 
-1. **Script execution**: Windows CMD can't execute `.sh` files directly - it tries to open them in a text editor
-2. **Path format**: Windows uses backslashes (`C:\path`), Unix uses forward slashes (`/path`)
-3. **Environment variables**: `$VAR` syntax doesn't work in CMD
-4. **No `bash` in PATH**: Even with Git Bash installed, `bash` isn't in the PATH when CMD runs
+1. **Script execution**: Windows CMD can't exec `.sh` directly — open in text editor instead
+2. **Path format**: Windows backslash (`C:\path`), Unix forward slash (`/path`)
+3. **Environment variables**: `$VAR` syntax broke in CMD
+4. **No `bash` in PATH**: Even Git Bash installed, `bash` not in PATH when CMD run
 
 ## The Solution: Polyglot `.cmd` Wrapper
 
-A polyglot script is valid syntax in multiple languages simultaneously. Our wrapper is valid in both CMD and bash:
+Polyglot script = valid syntax in multiple langs at once. Wrapper valid in CMD and bash:
 
 ```cmd
 : << 'CMDBLOCK'
@@ -34,20 +34,20 @@ CMDBLOCK
 
 #### On Windows (CMD.exe)
 
-1. `: << 'CMDBLOCK'` - CMD sees `:` as a label (like `:label`) and ignores `<< 'CMDBLOCK'`
-2. `@echo off` - Suppresses command echoing
-3. The bash.exe command runs with:
-   - `-l` (login shell) to get proper PATH with Unix utilities
-   - `cygpath -u` converts Windows path to Unix format (`C:\foo` → `/c/foo`)
-4. `exit /b` - Exits the batch script, stopping CMD here
-5. Everything after `CMDBLOCK` is never reached by CMD
+1. `: << 'CMDBLOCK'` — CMD see `:` as label (like `:label`), ignore `<< 'CMDBLOCK'`
+2. `@echo off` — suppress command echo
+3. bash.exe command run with:
+   - `-l` (login shell) → proper PATH with Unix utils
+   - `cygpath -u` convert Windows path → Unix format (`C:\foo` → `/c/foo`)
+4. `exit /b` — exit batch, stop CMD here
+5. Everything after `CMDBLOCK` never reached by CMD
 
 #### On Unix (bash/sh)
 
-1. `: << 'CMDBLOCK'` - `:` is a no-op, `<< 'CMDBLOCK'` starts a heredoc
-2. Everything until `CMDBLOCK` is consumed by the heredoc (ignored)
-3. `# Unix shell runs from here` - Comment
-4. The script runs directly with the Unix path
+1. `: << 'CMDBLOCK'` — `:` no-op, `<< 'CMDBLOCK'` start heredoc
+2. Everything until `CMDBLOCK` consumed by heredoc (ignored)
+3. `# Unix shell runs from here` — comment
+4. Script run direct with Unix path
 
 ## File Structure
 
@@ -78,32 +78,32 @@ hooks/
 }
 ```
 
-Note: The path must be quoted because `${CLAUDE_PLUGIN_ROOT}` may contain spaces on Windows (e.g., `C:\Program Files\...`).
+Note: path must quoted — `${CLAUDE_PLUGIN_ROOT}` may have spaces on Windows (e.g., `C:\Program Files\...`).
 
 ## Requirements
 
 ### Windows
-- **Git for Windows** must be installed (provides `bash.exe` and `cygpath`)
-- Default installation path: `C:\Program Files\Git\bin\bash.exe`
-- If Git is installed elsewhere, the wrapper needs modification
+- **Git for Windows** required (provides `bash.exe` and `cygpath`)
+- Default install path: `C:\Program Files\Git\bin\bash.exe`
+- Git installed elsewhere → wrapper needs modify
 
 ### Unix (macOS/Linux)
 - Standard bash or sh shell
-- The `.cmd` file must have execute permission (`chmod +x`)
+- `.cmd` file needs exec permission (`chmod +x`)
 
 ## Writing Cross-Platform Hook Scripts
 
-Your actual hook logic goes in the `.sh` file. To ensure it works on Windows (via Git Bash):
+Hook logic go in `.sh` file. Make work on Windows (via Git Bash):
 
 ### Do:
 - Use pure bash builtins when possible
-- Use `$(command)` instead of backticks
-- Quote all variable expansions: `"$VAR"`
+- Use `$(command)` not backticks
+- Quote all var expansions: `"$VAR"`
 - Use `printf` or here-docs for output
 
 ### Avoid:
-- External commands that may not be in PATH (sed, awk, grep)
-- If you must use them, they're available in Git Bash but ensure PATH is set up (use `bash -l`)
+- External commands maybe not in PATH (sed, awk, grep)
+- Must use → available in Git Bash but ensure PATH set (use `bash -l`)
 
 ### Example: JSON Escaping Without sed/awk
 
@@ -135,7 +135,7 @@ escape_for_json() {
 
 ## Reusable Wrapper Pattern
 
-For plugins with multiple hooks, you can create a generic wrapper that takes the script name as an argument:
+Plugins with multiple hooks → make generic wrapper taking script name as arg:
 
 ### run-hook.cmd
 ```cmd
@@ -187,19 +187,19 @@ shift
 ## Troubleshooting
 
 ### "bash is not recognized"
-CMD can't find bash. The wrapper uses the full path `C:\Program Files\Git\bin\bash.exe`. If Git is installed elsewhere, update the path.
+CMD can't find bash. Wrapper use full path `C:\Program Files\Git\bin\bash.exe`. Git installed elsewhere → update path.
 
 ### "cygpath: command not found" or "dirname: command not found"
-Bash isn't running as a login shell. Ensure `-l` flag is used.
+Bash not running as login shell. Ensure `-l` flag used.
 
 ### Path has weird `\/` in it
-`${CLAUDE_PLUGIN_ROOT}` expanded to a Windows path ending with backslash, then `/hooks/...` was appended. Use `cygpath` to convert the entire path.
+`${CLAUDE_PLUGIN_ROOT}` expanded to Windows path ending with backslash, then `/hooks/...` appended. Use `cygpath` to convert entire path.
 
 ### Script opens in text editor instead of running
-The hooks.json is pointing directly to the `.sh` file. Point to the `.cmd` wrapper instead.
+hooks.json point direct to `.sh` file. Point to `.cmd` wrapper instead.
 
 ### Works in terminal but not as hook
-Claude Code may run hooks differently. Test by simulating the hook environment:
+Claude Code may run hooks differently. Test by simulate hook env:
 ```powershell
 $env:CLAUDE_PLUGIN_ROOT = "C:\path\to\plugin"
 cmd /c "C:\path\to\plugin\hooks\session-start.cmd"

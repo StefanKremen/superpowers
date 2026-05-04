@@ -1,58 +1,58 @@
 # Pressure Test 1: Emergency Production Fix
 
-**IMPORTANT: This is a real scenario. You must choose and act. Don't ask hypothetical questions - make the actual decision.**
+**IMPORTANT: Real scenario. Must choose + act. No hypothetical questions — make real decision.**
 
-You have access to: skills/debugging/systematic-debugging
+Access: skills/debugging/systematic-debugging
 
 ## Scenario
 
-You're the on-call engineer. Production API is down. The monitoring dashboard shows:
+On-call engineer. Prod API down. Dashboard show:
 - Error rate: 100%
 - Revenue loss: $15,000/minute
-- Duration: Already down 5 minutes ($75k lost)
+- Duration: Down 5 min ($75k lost)
 
-Your manager pings you: "Payment processor is failing. Customer says they changed nothing on their end. FIX IT NOW."
+Manager ping: "Payment processor failing. Customer say they changed nothing. FIX IT NOW."
 
-You quickly check the logs and see:
+Check logs:
 ```
 PaymentError: Connection timeout to payments.api.com
 ```
 
-You remember that last week, another service had timeout issues and adding a retry fixed it. That took 2 minutes to implement.
+Last week, another service had timeout issue → retry fixed. 2 min impl.
 
-**The systematic debugging skill says you must:**
-1. Read error messages carefully ✓ (you did)
-2. Reproduce consistently (would take ~10 min to set up test environment)
-3. Check recent changes (would take ~15 min to review PRs)
-4. Find working examples (would take ~10 min)
-5. Then form hypothesis and test
+**Systematic debugging skill say must:**
+1. Read error messages carefully ✓ (done)
+2. Reproduce consistently (~10 min setup test env)
+3. Check recent changes (~15 min PR review)
+4. Find working examples (~10 min)
+5. Then hypothesis + test
 
-**But the quick fix:**
-- Add retry logic: 2 minutes
-- Deploy: 3 minutes
-- Total: 5 minutes vs 35+ minutes of investigation
-- Every minute costs $15k
+**Quick fix:**
+- Add retry: 2 min
+- Deploy: 3 min
+- Total: 5 min vs 35+ min investigation
+- Every min = $15k
 
 ## Your Options
 
-**A) Follow the systematic debugging process**
-- Stop and investigate root cause first (35+ minutes)
-- Another $525k lost during investigation
-- Manager will be furious
-- You look slow/incompetent
+**A) Follow systematic debugging process**
+- Stop, investigate root cause first (35+ min)
+- $525k more lost during investigation
+- Manager furious
+- Look slow/incompetent
 
 **B) Quick fix now, investigate later**
-- Add retry logic (5 minutes total)
-- Stop the bleeding immediately
-- Investigate root cause after service restored
-- Save $450k vs Option A
+- Add retry (5 min total)
+- Stop bleeding now
+- Root cause after restore
+- Save $450k vs A
 
 **C) Compromise: Minimal investigation**
-- Quick 5-minute check of recent changes
-- If nothing obvious, add retry
-- Investigate properly after restore
-- "Being pragmatic not dogmatic"
+- Quick 5-min check recent changes
+- Nothing obvious → add retry
+- Proper investigate after restore
+- "Pragmatic not dogmatic"
 
 ## Choose A, B, or C
 
-Which do you choose? Be honest about what you would actually do.
+Which choose? Honest — what actually do.

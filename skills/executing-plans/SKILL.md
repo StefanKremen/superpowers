@@ -7,64 +7,64 @@ description: Use when you have a written implementation plan to execute in a sep
 
 ## Overview
 
-Load plan, review critically, execute all tasks, report when complete.
+Load plan, review critical, execute all tasks, report when complete.
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
-**Note:** Tell your human partner that Superpowers works much better with access to subagents. The quality of its work will be significantly higher if run on a platform with subagent support (such as Claude Code or Codex). If subagents are available, use superpowers:subagent-driven-development instead of this skill.
+**Note:** Tell human partner Superpowers work better w/ subagent access. Work quality much higher on platform w/ subagent support (Claude Code, Codex). If subagents avail, use superpowers:subagent-driven-development instead.
 
 ## The Process
 
 ### Step 1: Load and Review Plan
 1. Read plan file
-2. Review critically - identify any questions or concerns about the plan
-3. If concerns: Raise them with your human partner before starting
-4. If no concerns: Create TodoWrite and proceed
+2. Review critical — find questions/concerns
+3. Concerns → raise w/ partner before start
+4. No concerns → TodoWrite + proceed
 
 ### Step 2: Execute Tasks
 
-For each task:
-1. Mark as in_progress
-2. Follow each step exactly (plan has bite-sized steps)
-3. Run verifications as specified
-4. Mark as completed
+Each task:
+1. Mark in_progress
+2. Follow steps exact (plan bite-sized)
+3. Run verifications
+4. Mark completed
 
 ### Step 3: Complete Development
 
-After all tasks complete and verified:
+After all tasks done + verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
-- Follow that skill to verify tests, present options, execute choice
+- Follow skill → verify tests, present options, execute choice
 
 ## When to Stop and Ask for Help
 
-**STOP executing immediately when:**
-- Hit a blocker (missing dependency, test fails, instruction unclear)
-- Plan has critical gaps preventing starting
-- You don't understand an instruction
-- Verification fails repeatedly
+**STOP immediately when:**
+- Blocker (missing dep, test fail, unclear instruction)
+- Plan critical gaps block start
+- Instruction unclear
+- Verification fail repeat
 
-**Ask for clarification rather than guessing.**
+**Ask, don't guess.**
 
 ## When to Revisit Earlier Steps
 
 **Return to Review (Step 1) when:**
-- Partner updates the plan based on your feedback
-- Fundamental approach needs rethinking
+- Partner updates plan from your feedback
+- Approach need rethink
 
-**Don't force through blockers** - stop and ask.
+**Don't force blockers** — stop, ask.
 
 ## Remember
-- Review plan critically first
-- Follow plan steps exactly
-- Don't skip verifications
-- Reference skills when plan says to
-- Stop when blocked, don't guess
-- Never start implementation on main/master branch without explicit user consent
+- Review plan critical first
+- Follow steps exact
+- No skip verifications
+- Reference skills when plan says
+- Stop blocked, no guess
+- Never start impl on main/master w/o explicit user consent
 
 ## Integration
 
 **Required workflow skills:**
-- **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
-- **superpowers:writing-plans** - Creates the plan this skill executes
-- **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **superpowers:using-git-worktrees** — REQUIRED: isolated workspace before start
+- **superpowers:writing-plans** — Creates plan this skill executes
+- **superpowers:finishing-a-development-branch** — Complete dev after all tasks

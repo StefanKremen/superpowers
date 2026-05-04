@@ -1,6 +1,6 @@
 # Superpowers for Codex
 
-Guide for using Superpowers with OpenAI Codex via native skill discovery.
+Guide use Superpowers w/ OpenAI Codex via native skill discovery.
 
 ## Quick Install
 
@@ -19,7 +19,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 
 ### Steps
 
-1. Clone the repo:
+1. Clone repo:
    ```bash
    git clone https://github.com/obra/superpowers.git ~/.codex/superpowers
    ```
@@ -114,13 +114,13 @@ Optionally delete the clone: `rm -rf ~/.codex/superpowers` (Windows: `Remove-Ite
 
 1. Verify the symlink: `ls -la ~/.agents/skills/superpowers`
 2. Check skills exist: `ls ~/.codex/superpowers/skills`
-3. Restart Codex — skills are discovered at startup
+3. Restart Codex — skills discovered @ startup
 
 ### Windows junction issues
 
-Junctions normally work without special permissions. If creation fails, try running PowerShell as administrator.
+Junctions work w/o special perms normally. If create fail, run PowerShell as admin.
 
 ## Getting Help
 
 - Report issues: https://github.com/obra/superpowers/issues
-- Main documentation: https://github.com/obra/superpowers
+- Main docs: https://github.com/obra/superpowers

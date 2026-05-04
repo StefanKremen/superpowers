@@ -5,11 +5,11 @@ description: Use when executing implementation plans with independent tasks in t
 
 # Subagent-Driven Development
 
-Execute plan by dispatching fresh subagent per task, with two-stage review after each: spec compliance review first, then code quality review.
+Execute plan: dispatch fresh subagent per task. Two-stage review after each: spec compliance then code quality.
 
-**Why subagents:** You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
+**Why subagents:** Delegate to specialized agents w/ isolated context. Craft instructions + context precisely → stay focused, succeed. Never inherit your session context — construct exactly what they need. Preserves your context for coordination.
 
-**Core principle:** Fresh subagent per task + two-stage review (spec then quality) = high quality, fast iteration
+**Core principle:** Fresh subagent per task + two-stage review (spec → quality) = high quality, fast iteration
 
 ## When to Use
 
@@ -86,36 +86,36 @@ digraph process {
 
 ## Model Selection
 
-Use the least powerful model that can handle each role to conserve cost and increase speed.
+Use least powerful model per role → save cost, gain speed.
 
-**Mechanical implementation tasks** (isolated functions, clear specs, 1-2 files): use a fast, cheap model. Most implementation tasks are mechanical when the plan is well-specified.
+**Mechanical implementation tasks** (isolated fns, clear specs, 1-2 files): fast cheap model. Most tasks mechanical when plan well-specified.
 
-**Integration and judgment tasks** (multi-file coordination, pattern matching, debugging): use a standard model.
+**Integration + judgment tasks** (multi-file coord, pattern matching, debugging): standard model.
 
-**Architecture, design, and review tasks**: use the most capable available model.
+**Architecture, design, review tasks**: most capable model.
 
 **Task complexity signals:**
-- Touches 1-2 files with a complete spec → cheap model
-- Touches multiple files with integration concerns → standard model
-- Requires design judgment or broad codebase understanding → most capable model
+- 1-2 files + complete spec → cheap model
+- Multi-file w/ integration → standard model
+- Design judgment or broad codebase understanding → most capable model
 
 ## Handling Implementer Status
 
-Implementer subagents report one of four statuses. Handle each appropriately:
+Implementer reports one of four statuses. Handle each:
 
 **DONE:** Proceed to spec compliance review.
 
-**DONE_WITH_CONCERNS:** The implementer completed the work but flagged doubts. Read the concerns before proceeding. If the concerns are about correctness or scope, address them before review. If they're observations (e.g., "this file is getting large"), note them and proceed to review.
+**DONE_WITH_CONCERNS:** Completed but flagged doubts. Read concerns first. Correctness/scope concerns → address before review. Observations (e.g., "file getting large") → note + proceed.
 
-**NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
+**NEEDS_CONTEXT:** Missing info. Provide + re-dispatch.
 
-**BLOCKED:** The implementer cannot complete the task. Assess the blocker:
-1. If it's a context problem, provide more context and re-dispatch with the same model
-2. If the task requires more reasoning, re-dispatch with a more capable model
-3. If the task is too large, break it into smaller pieces
-4. If the plan itself is wrong, escalate to the human
+**BLOCKED:** Cannot complete. Assess blocker:
+1. Context problem → more context, re-dispatch same model
+2. Needs more reasoning → re-dispatch w/ more capable model
+3. Too large → break into smaller pieces
+4. Plan wrong → escalate to human
 
-**Never** ignore an escalation or force the same model to retry without changes. If the implementer said it's stuck, something needs to change.
+**Never** ignore escalation or force same model to retry unchanged. Stuck = something must change.
 
 ## Prompt Templates
 
@@ -204,7 +204,7 @@ Done!
 **vs. Manual execution:**
 - Subagents follow TDD naturally
 - Fresh context per task (no confusion)
-- Parallel-safe (subagents don't interfere)
+- Parallel-safe (no interference)
 - Subagent can ask questions (before AND during work)
 
 **vs. Executing Plans:**
@@ -213,65 +213,65 @@ Done!
 - Review checkpoints automatic
 
 **Efficiency gains:**
-- No file reading overhead (controller provides full text)
-- Controller curates exactly what context is needed
-- Subagent gets complete information upfront
+- No file-reading overhead (controller provides full text)
+- Controller curates exact context needed
+- Subagent gets complete info upfront
 - Questions surfaced before work begins (not after)
 
 **Quality gates:**
 - Self-review catches issues before handoff
-- Two-stage review: spec compliance, then code quality
-- Review loops ensure fixes actually work
+- Two-stage review: spec compliance → code quality
+- Review loops ensure fixes work
 - Spec compliance prevents over/under-building
-- Code quality ensures implementation is well-built
+- Code quality ensures well-built impl
 
 **Cost:**
 - More subagent invocations (implementer + 2 reviewers per task)
-- Controller does more prep work (extracting all tasks upfront)
+- Controller more prep work (extract all tasks upfront)
 - Review loops add iterations
-- But catches issues early (cheaper than debugging later)
+- But catches issues early (cheaper than debug later)
 
 ## Red Flags
 
 **Never:**
-- Start implementation on main/master branch without explicit user consent
+- Start impl on main/master branch w/o explicit user consent
 - Skip reviews (spec compliance OR code quality)
-- Proceed with unfixed issues
-- Dispatch multiple implementation subagents in parallel (conflicts)
+- Proceed w/ unfixed issues
+- Dispatch multiple impl subagents in parallel (conflicts)
 - Make subagent read plan file (provide full text instead)
-- Skip scene-setting context (subagent needs to understand where task fits)
-- Ignore subagent questions (answer before letting them proceed)
-- Accept "close enough" on spec compliance (spec reviewer found issues = not done)
-- Skip review loops (reviewer found issues = implementer fixes = review again)
-- Let implementer self-review replace actual review (both are needed)
+- Skip scene-setting context (subagent needs to know where task fits)
+- Ignore subagent questions (answer before they proceed)
+- Accept "close enough" on spec compliance (issues found = not done)
+- Skip review loops (issues found = fix = re-review)
+- Let self-review replace actual review (both needed)
 - **Start code quality review before spec compliance is ✅** (wrong order)
-- Move to next task while either review has open issues
+- Move to next task w/ open review issues
 
 **If subagent asks questions:**
-- Answer clearly and completely
-- Provide additional context if needed
-- Don't rush them into implementation
+- Answer clearly + completely
+- Provide more context if needed
+- Don't rush into implementation
 
 **If reviewer finds issues:**
-- Implementer (same subagent) fixes them
+- Implementer (same subagent) fixes
 - Reviewer reviews again
 - Repeat until approved
-- Don't skip the re-review
+- Don't skip re-review
 
 **If subagent fails task:**
-- Dispatch fix subagent with specific instructions
-- Don't try to fix manually (context pollution)
+- Dispatch fix subagent w/ specific instructions
+- Don't fix manually (context pollution)
 
 ## Integration
 
 **Required workflow skills:**
-- **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
-- **superpowers:writing-plans** - Creates the plan this skill executes
+- **superpowers:using-git-worktrees** - REQUIRED: isolated workspace before start
+- **superpowers:writing-plans** - Creates plan this skill executes
 - **superpowers:requesting-code-review** - Code review template for reviewer subagents
-- **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **superpowers:finishing-a-development-branch** - Complete dev after all tasks
 
 **Subagents should use:**
-- **superpowers:test-driven-development** - Subagents follow TDD for each task
+- **superpowers:test-driven-development** - Subagents follow TDD per task
 
 **Alternative workflow:**
-- **superpowers:executing-plans** - Use for parallel session instead of same-session execution
+- **superpowers:executing-plans** - Parallel session instead of same-session execution

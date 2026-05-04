@@ -6,7 +6,7 @@
 
 ## Installation
 
-Add superpowers to the `plugin` array in your `opencode.json` (global or project-level):
+Add superpowers to `plugin` array in `opencode.json` (global or project-level):
 
 ```json
 {
@@ -14,13 +14,13 @@ Add superpowers to the `plugin` array in your `opencode.json` (global or project
 }
 ```
 
-Restart OpenCode. That's it — the plugin auto-installs and registers all skills.
+Restart OpenCode. Done — plugin auto-install + register all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify: ask "Tell me about your superpowers"
 
 ## Migrating from the old symlink-based install
 
-If you previously installed superpowers using `git clone` and symlinks, remove the old setup:
+Previously used `git clone` + symlinks? Remove old setup:
 
 ```bash
 # Remove old symlinks
@@ -33,11 +33,11 @@ rm -rf ~/.config/opencode/superpowers
 # Remove skills.paths from opencode.json if you added one for superpowers
 ```
 
-Then follow the installation steps above.
+Then follow install steps above.
 
 ## Usage
 
-Use OpenCode's native `skill` tool:
+Use OpenCode native `skill` tool:
 
 ```
 use skill tool to list skills
@@ -46,9 +46,9 @@ use skill tool to load superpowers/brainstorming
 
 ## Updating
 
-Superpowers updates automatically when you restart OpenCode.
+Superpowers auto-updates on OpenCode restart.
 
-To pin a specific version:
+Pin specific version:
 
 ```json
 {
@@ -61,21 +61,21 @@ To pin a specific version:
 ### Plugin not loading
 
 1. Check logs: `opencode run --print-logs "hello" 2>&1 | grep -i superpowers`
-2. Verify the plugin line in your `opencode.json`
-3. Make sure you're running a recent version of OpenCode
+2. Verify plugin line in `opencode.json`
+3. Run recent OpenCode version
 
 ### Skills not found
 
-1. Use `skill` tool to list what's discovered
-2. Check that the plugin is loading (see above)
+1. `skill` tool → list discovered
+2. Check plugin loading (above)
 
 ### Tool mapping
 
-When skills reference Claude Code tools:
+Skills referencing Claude Code tools:
 - `TodoWrite` → `todowrite`
 - `Task` with subagents → `@mention` syntax
-- `Skill` tool → OpenCode's native `skill` tool
-- File operations → your native tools
+- `Skill` tool → OpenCode native `skill` tool
+- File ops → native tools
 
 ## Getting Help
 

@@ -6,11 +6,11 @@
 
 ## Overview
 
-Add full superpowers support for OpenCode.ai using a native OpenCode plugin architecture that shares core functionality with the existing Codex implementation.
+Add full superpowers support OpenCode.ai. Native OpenCode plugin arch, share core w/ existing Codex impl.
 
 ## Background
 
-OpenCode.ai is a coding agent similar to Claude Code and Codex. Previous attempts to port superpowers to OpenCode (PR #93, PR #116) used file-copying approaches. This design takes a different approach: building a native OpenCode plugin using their JavaScript/TypeScript plugin system while sharing code with the Codex implementation.
+OpenCode.ai = coding agent like Claude Code + Codex. Prior superpowers ports (PR #93, PR #116) used file-copy. This design different: native OpenCode plugin via JS/TS plugin system, share code w/ Codex impl.
 
 ### Key Differences Between Platforms
 
@@ -30,8 +30,8 @@ OpenCode.ai is a coding agent similar to Claude Code and Codex. Previous attempt
 ### High-Level Structure
 
 1. **Shared Core Module** (`lib/skills-core.js`)
-   - Common skill discovery and parsing logic
-   - Used by both Codex and OpenCode implementations
+   - Common skill discovery + parsing
+   - Used by Codex + OpenCode
 
 2. **Platform-Specific Wrappers**
    - Codex: CLI script (`.codex/superpowers-codex`)
@@ -43,7 +43,7 @@ OpenCode.ai is a coding agent similar to Claude Code and Codex. Previous attempt
 
 ### Code Reuse Strategy
 
-Extract common functionality from `.codex/superpowers-codex` into shared module:
+Extract common fns from `.codex/superpowers-codex` → shared module:
 
 ```javascript
 // lib/skills-core.js
@@ -73,7 +73,7 @@ description: Use when [condition] - [what it does]; [additional context]
 
 **Tool 1: `use_skill`**
 
-Loads a specific skill's content into the conversation (equivalent to Claude's Skill tool).
+Load specific skill content into convo (= Claude's Skill tool).
 
 ```javascript
 {
@@ -98,7 +98,7 @@ ${content}`;
 
 **Tool 2: `find_skills`**
 
-Lists all available skills with metadata.
+List all skills + metadata.
 
 ```javascript
 {
@@ -118,15 +118,15 @@ Lists all available skills with metadata.
 
 ### Session Startup Hook
 
-When a new session starts (`session.started` event):
+On new session (`session.started` event):
 
 1. **Inject using-superpowers content**
-   - Full content of the using-superpowers skill
-   - Establishes mandatory workflows
+   - Full using-superpowers skill content
+   - Set mandatory workflows
 
 2. **Run find_skills automatically**
-   - Display full list of available skills upfront
-   - Include skill directories for each
+   - Show full skill list upfront
+   - Include skill dirs each
 
 3. **Inject tool mapping instructions**
    ```markdown
@@ -264,31 +264,31 @@ superpowers/
    - Branch: `feature/opencode-support`
 
 2. **Follow TDD where applicable**
-   - Test shared core functions
-   - Test skill discovery and parsing
-   - Integration tests for both platforms
+   - Test shared core fns
+   - Test skill discovery + parse
+   - Integration tests both platforms
 
 3. **Incremental implementation**
    - Phase 1: Refactor shared core + update Codex
-   - Verify Codex still works before moving on
+   - Verify Codex works before moving
    - Phase 2: Build OpenCode plugin
-   - Phase 3: Documentation and polish
+   - Phase 3: Docs + polish
 
 4. **Testing strategy**
-   - Manual testing with real OpenCode installation
-   - Verify skill loading, directories, scripts work
-   - Test both Codex and OpenCode side-by-side
-   - Verify tool mappings work correctly
+   - Manual test w/ real OpenCode install
+   - Verify skill load, dirs, scripts work
+   - Test Codex + OpenCode side-by-side
+   - Verify tool mappings work
 
 5. **PR and merge**
-   - Create PR with complete implementation
-   - Test in clean environment
-   - Merge to main
+   - Create PR w/ full impl
+   - Test clean env
+   - Merge → main
 
 ## Benefits
 
-- **Code reuse**: Single source of truth for skill discovery/parsing
-- **Maintainability**: Bug fixes apply to both platforms
-- **Extensibility**: Easy to add future platforms (Cursor, Windsurf, etc.)
-- **Native integration**: Uses OpenCode's plugin system properly
-- **Consistency**: Same skill experience across all platforms
+- **Code reuse**: Single source of truth skill discovery/parse
+- **Maintainability**: Bug fixes hit both platforms
+- **Extensibility**: Easy add future platforms (Cursor, Windsurf, etc.)
+- **Native integration**: Use OpenCode plugin system properly
+- **Consistency**: Same skill UX all platforms

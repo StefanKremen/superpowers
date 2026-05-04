@@ -5,12 +5,12 @@ labels: bug
 ---
 
 <!--
-BEFORE FILING: Search open AND closed issues. The Windows SessionStart
-hook alone has been reported 29 times. If your issue already exists,
-add a comment or reaction to the existing one instead.
+BEFORE FILING: Search open AND closed issues. Windows SessionStart
+hook alone reported 29 times. If issue exist, comment or react on
+existing one instead.
 -->
 
-- [ ] I searched existing issues and this is not a duplicate
+- [ ] Searched existing issues, not duplicate
 
 ## Environment
 
@@ -23,17 +23,16 @@ add a comment or reaction to the existing one instead.
 | OS + shell | |
 
 ## Is this a Superpowers issue or a platform issue?
-<!-- Superpowers is a plugin. Some reported "bugs" are actually issues
-     in the underlying platform or model. If you're not sure, try
-     reproducing without Superpowers installed.
+<!-- Superpowers = plugin. Some reported "bugs" actually platform or
+     model issues. Unsure? Reproduce without Superpowers installed.
 
-     If the problem persists without Superpowers, file the issue with
-     your platform instead. -->
+     Problem persist without Superpowers? File with platform
+     instead. -->
 
-- [ ] I confirmed this issue does not occur without Superpowers installed
+- [ ] Confirmed issue does not occur without Superpowers installed
 
 ## What happened?
-<!-- Be specific. "It doesn't work" is not a bug report. -->
+<!-- Be specific. "It doesn't work" not bug report. -->
 
 ## Steps to reproduce
 1.
@@ -41,12 +40,12 @@ add a comment or reaction to the existing one instead.
 3.
 
 ## Expected behavior
-<!-- What should have happened? -->
+<!-- Should have happened? -->
 
 ## Actual behavior
-<!-- What happened instead? -->
+<!-- Happened instead? -->
 
 ## Debug log or conversation transcript
-<!-- A debug log or conversation transcript showing the issue is the
-     single most helpful thing you can include. Without one, we're
-     guessing. Screenshots of error output are also useful. -->
+<!-- Debug log or conversation transcript showing issue = single most
+     helpful thing to include. Without one, we guess. Error output
+     screenshots also useful. -->

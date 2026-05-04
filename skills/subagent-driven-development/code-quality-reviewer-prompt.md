@@ -1,8 +1,8 @@
 # Code Quality Reviewer Prompt Template
 
-Use this template when dispatching a code quality reviewer subagent.
+Use template when dispatch code quality reviewer subagent.
 
-**Purpose:** Verify implementation is well-built (clean, tested, maintainable)
+**Purpose:** Verify impl well-built (clean, tested, maintainable)
 
 **Only dispatch after spec compliance review passes.**
 
@@ -17,10 +17,10 @@ Task tool (superpowers:code-reviewer):
   DESCRIPTION: [task summary]
 ```
 
-**In addition to standard code quality concerns, the reviewer should check:**
-- Does each file have one clear responsibility with a well-defined interface?
-- Are units decomposed so they can be understood and tested independently?
-- Is the implementation following the file structure from the plan?
-- Did this implementation create new files that are already large, or significantly grow existing files? (Don't flag pre-existing file sizes — focus on what this change contributed.)
+**Beyond standard code quality, reviewer check:**
+- Each file → one clear responsibility, well-defined interface?
+- Units decomposed → understood + tested independently?
+- Impl follow file structure from plan?
+- Change create new files already large, or grow existing files big? (Skip pre-existing sizes — focus what this change added.)
 
 **Code reviewer returns:** Strengths, Issues (Critical/Important/Minor), Assessment

@@ -2,16 +2,16 @@
 
 ## Overview
 
-Add two new review stages to the superpowers workflow:
+Add two review stages to superpowers workflow:
 
 1. **Spec Document Review** - After brainstorming, before writing-plans
 2. **Plan Document Review** - After writing-plans, before implementation
 
-Both follow the iterative loop pattern used by implementation reviews.
+Both follow iterative loop pattern from impl reviews.
 
 ## Spec Document Reviewer
 
-**Purpose:** Verify the spec is complete, consistent, and ready for implementation planning.
+**Purpose:** Verify spec complete, consistent, ready for impl planning.
 
 **Location:** `skills/brainstorming/spec-document-reviewer-prompt.md`
 
@@ -38,13 +38,13 @@ Both follow the iterative loop pattern used by implementation reviews.
 - [suggestions that don't block approval]
 ```
 
-**Review loop:** Issues found -> brainstorming agent fixes -> re-review -> repeat until approved.
+**Review loop:** Issues → brainstorming agent fix → re-review → repeat til approved.
 
-**Dispatch mechanism:** Use the Task tool with `subagent_type: general-purpose`. The reviewer prompt template provides the full prompt. The brainstorming skill's controller dispatches the reviewer.
+**Dispatch mechanism:** Task tool, `subagent_type: general-purpose`. Reviewer prompt template = full prompt. Brainstorming skill controller dispatches reviewer.
 
 ## Plan Document Reviewer
 
-**Purpose:** Verify the plan is complete, matches the spec, and has proper task decomposition.
+**Purpose:** Verify plan complete, matches spec, proper task decomposition.
 
 **Location:** `skills/writing-plans/plan-document-reviewer-prompt.md`
 
@@ -58,25 +58,25 @@ Both follow the iterative loop pattern used by implementation reviews.
 | Task Syntax | Checkbox syntax on tasks and steps |
 | Chunk Size | Each chunk under 1000 lines |
 
-**Chunk definition:** A chunk is a logical grouping of tasks within the plan document, delimited by `## Chunk N: <name>` headings. The writing-plans skill creates these boundaries based on logical phases (e.g., "Foundation", "Core Features", "Integration"). Each chunk should be self-contained enough to review independently.
+**Chunk definition:** Chunk = logical task grouping in plan doc, delimited by `## Chunk N: <name>` headings. Writing-plans skill creates boundaries by logical phases (e.g. "Foundation", "Core Features", "Integration"). Each chunk self-contained → reviewable independently.
 
-**Spec alignment verification:** The reviewer receives both:
-1. The plan document (or current chunk)
-2. The path to the spec document for reference
+**Spec alignment verification:** Reviewer gets both:
+1. Plan doc (or current chunk)
+2. Path to spec doc for reference
 
-The reviewer reads both and compares requirements coverage.
+Reviewer reads both → compares requirements coverage.
 
-**Output format:** Same as spec reviewer, but scoped to the current chunk.
+**Output format:** Same as spec reviewer, scoped to current chunk.
 
 **Review process (chunk-by-chunk):**
 1. Writing-plans creates chunk N
-2. Controller dispatches plan-document-reviewer with chunk N content and spec path
-3. Reviewer reads chunk and spec, returns verdict
-4. If issues: writing-plans agent fixes chunk N, goto step 2
-5. If approved: proceed to chunk N+1
-6. Repeat until all chunks approved
+2. Controller dispatches plan-document-reviewer w/ chunk N content + spec path
+3. Reviewer reads chunk + spec, returns verdict
+4. Issues → writing-plans fix chunk N, goto 2
+5. Approved → chunk N+1
+6. Repeat til all chunks approved
 
-**Dispatch mechanism:** Same as spec reviewer - Task tool with `subagent_type: general-purpose`.
+**Dispatch mechanism:** Same as spec reviewer — Task tool, `subagent_type: general-purpose`.
 
 ## Updated Workflow
 
@@ -87,18 +87,18 @@ brainstorming -> spec -> SPEC REVIEW LOOP -> writing-plans -> plan -> PLAN REVIE
 **Spec Review Loop:**
 1. Spec complete
 2. Dispatch reviewer
-3. If issues: fix -> goto 2
-4. If approved: proceed
+3. Issues → fix → goto 2
+4. Approved → proceed
 
 **Plan Review Loop:**
 1. Chunk N complete
 2. Dispatch reviewer for chunk N
-3. If issues: fix -> goto 2
-4. If approved: next chunk or implementation
+3. Issues → fix → goto 2
+4. Approved → next chunk or impl
 
 ## Markdown Task Syntax
 
-Tasks and steps use checkbox syntax:
+Tasks + steps use checkbox syntax:
 
 ```markdown
 - [ ] ### Task 1: Name
@@ -111,19 +111,19 @@ Tasks and steps use checkbox syntax:
 ## Error Handling
 
 **Review loop termination:**
-- No hard iteration limit - loops continue until reviewer approves
-- If loop exceeds 5 iterations, the controller should surface this to the human for guidance
-- The human can choose to: continue iterating, approve with known issues, or abort
+- No hard iter limit — loop til reviewer approves
+- Loop > 5 iter → controller surface to human for guidance
+- Human choice: continue, approve w/ known issues, abort
 
 **Disagreement handling:**
-- Reviewers are advisory - they flag issues but don't block
-- If the agent believes reviewer feedback is incorrect, it should explain why in its fix
-- If disagreement persists after 3 iterations on the same issue, surface to human
+- Reviewers advisory — flag issues, don't block
+- Agent thinks feedback wrong → explain why in fix
+- Disagreement persist > 3 iter on same issue → surface to human
 
 **Malformed reviewer output:**
-- Controller should validate reviewer output has required fields (Status, Issues if applicable)
-- If malformed, re-dispatch reviewer with a note about expected format
-- After 2 malformed responses, surface to human
+- Controller validate reviewer output has required fields (Status, Issues if applicable)
+- Malformed → re-dispatch w/ note about expected format
+- After 2 malformed responses → surface to human
 
 ## Files to Change
 

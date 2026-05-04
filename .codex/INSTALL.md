@@ -1,6 +1,6 @@
 # Installing Superpowers for Codex
 
-Enable superpowers skills in Codex via native skill discovery. Just clone and symlink.
+Enable superpowers skills in Codex via native skill discovery. Clone + symlink.
 
 ## Prerequisites
 

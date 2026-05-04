@@ -7,7 +7,7 @@ description: Use when implementation is complete, all tests pass, and you need t
 
 ## Overview
 
-Guide completion of development work by presenting clear options and handling chosen workflow.
+Guide completion of dev work. Present clear options, handle chosen workflow.
 
 **Core principle:** Verify tests → Present options → Execute choice → Clean up.
 
@@ -17,7 +17,7 @@ Guide completion of development work by presenting clear options and handling ch
 
 ### Step 1: Verify Tests
 
-**Before presenting options, verify tests pass:**
+**Before options, verify tests pass:**
 
 ```bash
 # Run project's test suite
@@ -33,9 +33,9 @@ Tests failing (<N> failures). Must fix before completing:
 Cannot proceed with merge/PR until tests pass.
 ```
 
-Stop. Don't proceed to Step 2.
+Stop. Skip Step 2.
 
-**If tests pass:** Continue to Step 2.
+**If pass:** Step 2.
 
 ### Step 2: Determine Base Branch
 
@@ -61,7 +61,7 @@ Implementation complete. What would you like to do?
 Which option?
 ```
 
-**Don't add explanation** - keep options concise.
+**No explanation** — keep concise.
 
 ### Step 4: Execute Choice
 
@@ -109,7 +109,7 @@ Then: Cleanup worktree (Step 5)
 
 Report: "Keeping branch <name>. Worktree preserved at <path>."
 
-**Don't cleanup worktree.**
+**No cleanup worktree.**
 
 #### Option 4: Discard
 
@@ -147,7 +147,7 @@ If yes:
 git worktree remove <worktree-path>
 ```
 
-**For Option 3:** Keep worktree.
+**Option 3:** Keep worktree.
 
 ## Quick Reference
 
@@ -162,7 +162,7 @@ git worktree remove <worktree-path>
 
 **Skipping test verification**
 - **Problem:** Merge broken code, create failing PR
-- **Fix:** Always verify tests before offering options
+- **Fix:** Verify tests before offering options
 
 **Open-ended questions**
 - **Problem:** "What should I do next?" → ambiguous
@@ -170,7 +170,7 @@ git worktree remove <worktree-path>
 
 **Automatic worktree cleanup**
 - **Problem:** Remove worktree when might need it (Option 2, 3)
-- **Fix:** Only cleanup for Options 1 and 4
+- **Fix:** Cleanup only for Options 1 and 4
 
 **No confirmation for discard**
 - **Problem:** Accidentally delete work

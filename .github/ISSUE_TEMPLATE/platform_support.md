@@ -1,6 +1,6 @@
 ---
 name: IDE / Platform Support Request
-about: Request support for a new IDE, editor, or AI coding tool
+about: Request support for new IDE, editor, or AI coding tool
 labels: platform-support
 ---
 
@@ -15,9 +15,9 @@ requested or discussed.
 <!-- Name and link -->
 
 ## Does this tool have a plugin or extension system?
-<!-- If yes, link to the docs. If no, explain how third-party
+<!-- If yes, link docs. If no, explain how third-party
      integrations typically work with this tool. -->
 
 ## Have you tried manual installation?
-<!-- Many tools work with Superpowers through manual setup even without
+<!-- Many tools work with Superpowers via manual setup even without
      official support. Did you try? What happened? -->

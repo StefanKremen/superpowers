@@ -1,6 +1,6 @@
 # Copilot CLI Tool Mapping
 
-Skills use Claude Code tool names. When you encounter these in a skill, use your platform equivalent:
+Skills use Claude Code tool names. Encounter in skill → use platform equivalent:
 
 | Skill references | Copilot CLI equivalent |
 |-----------------|----------------------|
@@ -15,38 +15,38 @@ Skills use Claude Code tool names. When you encounter these in a skill, use your
 | `Task` tool (dispatch subagent) | `task` (see [Agent types](#agent-types)) |
 | Multiple `Task` calls (parallel) | Multiple `task` calls |
 | Task status/output | `read_agent`, `list_agents` |
-| `TodoWrite` (task tracking) | `sql` with built-in `todos` table |
-| `WebSearch` | No equivalent — use `web_fetch` with a search engine URL |
-| `EnterPlanMode` / `ExitPlanMode` | No equivalent — stay in the main session |
+| `TodoWrite` (task tracking) | `sql` w/ built-in `todos` table |
+| `WebSearch` | None — use `web_fetch` w/ search engine URL |
+| `EnterPlanMode` / `ExitPlanMode` | None — stay in main session |
 
 ## Agent types
 
-Copilot CLI's `task` tool accepts an `agent_type` parameter:
+Copilot CLI `task` tool takes `agent_type` param:
 
 | Claude Code agent | Copilot CLI equivalent |
 |-------------------|----------------------|
 | `general-purpose` | `"general-purpose"` |
 | `Explore` | `"explore"` |
-| Named plugin agents (e.g. `superpowers:code-reviewer`) | Discovered automatically from installed plugins |
+| Named plugin agents (e.g. `superpowers:code-reviewer`) | Auto-discovered from installed plugins |
 
 ## Async shell sessions
 
-Copilot CLI supports persistent async shell sessions, which have no direct Claude Code equivalent:
+Copilot CLI supports persistent async shell sessions. No Claude Code equivalent:
 
 | Tool | Purpose |
 |------|---------|
-| `bash` with `async: true` | Start a long-running command in the background |
-| `write_bash` | Send input to a running async session |
-| `read_bash` | Read output from an async session |
-| `stop_bash` | Terminate an async session |
-| `list_bash` | List all active shell sessions |
+| `bash` with `async: true` | Start long-running cmd in background |
+| `write_bash` | Send input → running async session |
+| `read_bash` | Read output from async session |
+| `stop_bash` | Kill async session |
+| `list_bash` | List active shell sessions |
 
 ## Additional Copilot CLI tools
 
 | Tool | Purpose |
 |------|---------|
-| `store_memory` | Persist facts about the codebase for future sessions |
-| `report_intent` | Update the UI status line with current intent |
-| `sql` | Query the session's SQLite database (todos, metadata) |
-| `fetch_copilot_cli_documentation` | Look up Copilot CLI documentation |
-| GitHub MCP tools (`github-mcp-server-*`) | Native GitHub API access (issues, PRs, code search) |
+| `store_memory` | Persist codebase facts for future sessions |
+| `report_intent` | Update UI status line w/ current intent |
+| `sql` | Query session SQLite DB (todos, metadata) |
+| `fetch_copilot_cli_documentation` | Look up Copilot CLI docs |
+| GitHub MCP tools (`github-mcp-server-*`) | Native GitHub API (issues, PRs, code search) |

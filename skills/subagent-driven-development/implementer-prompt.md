@@ -1,6 +1,6 @@
 # Implementer Subagent Prompt Template
 
-Use this template when dispatching an implementer subagent.
+Use when dispatch implementer subagent.
 
 ```
 Task tool (general-purpose):

@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan.
 
-**Goal:** Add spec and plan document review loops to the brainstorming and writing-plans skills.
+**Goal:** Add spec + plan doc review loops to brainstorming + writing-plans skills.
 
-**Architecture:** Create reviewer prompt templates in each skill directory. Modify skill files to add review loops after document creation. Use Task tool with general-purpose subagent for reviewer dispatch.
+**Architecture:** Reviewer prompt templates in each skill dir. Modify skill files → add review loops after doc creation. Task tool w/ general-purpose subagent for reviewer dispatch.
 
 **Tech Stack:** Markdown skill files, subagent dispatch via Task tool
 
@@ -14,14 +14,14 @@
 
 ## Chunk 1: Spec Document Reviewer
 
-This chunk adds the spec document reviewer to the brainstorming skill.
+Adds spec doc reviewer to brainstorming skill.
 
 ### Task 1: Create Spec Document Reviewer Prompt Template
 
 **Files:**
 - Create: `skills/brainstorming/spec-document-reviewer-prompt.md`
 
-- [ ] **Step 1:** Create the reviewer prompt template file
+- [ ] **Step 1:** Create reviewer prompt template file
 
 ```markdown
 # Spec Document Reviewer Prompt Template
@@ -73,10 +73,10 @@ Task tool (general-purpose):
 **Reviewer returns:** Status, Issues (if any), Recommendations
 ```
 
-- [ ] **Step 2:** Verify the file was created correctly
+- [ ] **Step 2:** Verify file created
 
 Run: `cat skills/brainstorming/spec-document-reviewer-prompt.md | head -20`
-Expected: Shows the header and purpose section
+Expected: Shows header + purpose section
 
 - [ ] **Step 3:** Commit
 
@@ -92,13 +92,13 @@ git commit -m "feat: add spec document reviewer prompt template"
 **Files:**
 - Modify: `skills/brainstorming/SKILL.md`
 
-- [ ] **Step 1:** Read the current brainstorming skill
+- [ ] **Step 1:** Read current brainstorming skill
 
 Run: `cat skills/brainstorming/SKILL.md`
 
-- [ ] **Step 2:** Add the review loop section after "After the Design"
+- [ ] **Step 2:** Add review loop section after "After the Design"
 
-Find the "After the Design" section and add a new "Spec Review Loop" section after documentation but before implementation:
+Find "After the Design" section → add new "Spec Review Loop" section after docs but before impl:
 
 ```markdown
 **Spec Review Loop:**
@@ -116,10 +116,10 @@ After writing the spec document:
 - Reviewers are advisory - explain disagreements if you believe feedback is incorrect
 ```
 
-- [ ] **Step 3:** Verify the changes
+- [ ] **Step 3:** Verify changes
 
 Run: `grep -A 15 "Spec Review Loop" skills/brainstorming/SKILL.md`
-Expected: Shows the new review loop section
+Expected: Shows new review loop section
 
 - [ ] **Step 4:** Commit
 
@@ -132,14 +132,14 @@ git commit -m "feat: add spec review loop to brainstorming skill"
 
 ## Chunk 2: Plan Document Reviewer
 
-This chunk adds the plan document reviewer to the writing-plans skill.
+Adds plan doc reviewer to writing-plans skill.
 
 ### Task 3: Create Plan Document Reviewer Prompt Template
 
 **Files:**
 - Create: `skills/writing-plans/plan-document-reviewer-prompt.md`
 
-- [ ] **Step 1:** Create the reviewer prompt template file
+- [ ] **Step 1:** Create reviewer prompt template file
 
 ```markdown
 # Plan Document Reviewer Prompt Template
@@ -193,10 +193,10 @@ Task tool (general-purpose):
 **Reviewer returns:** Status, Issues (if any), Recommendations
 ```
 
-- [ ] **Step 2:** Verify the file was created
+- [ ] **Step 2:** Verify file created
 
 Run: `cat skills/writing-plans/plan-document-reviewer-prompt.md | head -20`
-Expected: Shows the header and purpose section
+Expected: Shows header + purpose section
 
 - [ ] **Step 3:** Commit
 
@@ -218,7 +218,7 @@ Run: `cat skills/writing-plans/SKILL.md`
 
 - [ ] **Step 2:** Add chunk-by-chunk review section
 
-Add before the "Execution Handoff" section:
+Add before "Execution Handoff" section:
 
 ```markdown
 ## Plan Review Loop
@@ -236,9 +236,9 @@ After completing each chunk of the plan:
 **Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks. Each chunk should be ≤1000 lines and logically self-contained.
 ```
 
-- [ ] **Step 3:** Update task syntax examples to use checkboxes
+- [ ] **Step 3:** Update task syntax examples → checkboxes
 
-Change the Task Structure section to show checkbox syntax:
+Change Task Structure section → checkbox syntax:
 
 ```markdown
 ### Task N: [Component Name]
@@ -248,12 +248,12 @@ Change the Task Structure section to show checkbox syntax:
   ...
 ```
 
-- [ ] **Step 4:** Verify the review loop section was added
+- [ ] **Step 4:** Verify review loop section added
 
 Run: `grep -A 15 "Plan Review Loop" skills/writing-plans/SKILL.md`
-Expected: Shows the new review loop section
+Expected: Shows new review loop section
 
-- [ ] **Step 5:** Verify the task syntax examples were updated
+- [ ] **Step 5:** Verify task syntax examples updated
 
 Run: `grep -A 5 "Task N:" skills/writing-plans/SKILL.md`
 Expected: Shows checkbox syntax `### Task N:`
@@ -269,7 +269,7 @@ git commit -m "feat: add plan review loop and checkbox syntax to writing-plans s
 
 ## Chunk 3: Update Plan Document Header
 
-This chunk updates the plan document header template to reference the new checkbox syntax requirements.
+Updates plan doc header template → reference new checkbox syntax reqs.
 
 ### Task 5: Update Plan Header Template in Writing-Plans Skill
 
@@ -280,18 +280,18 @@ This chunk updates the plan document header template to reference the new checkb
 
 Run: `grep -A 20 "Plan Document Header" skills/writing-plans/SKILL.md`
 
-- [ ] **Step 2:** Update the header template to reference checkbox syntax
+- [ ] **Step 2:** Update header template → reference checkbox syntax
 
-The plan header should note that tasks and steps use checkbox syntax. Update the header comment:
+Plan header should note tasks + steps use checkbox syntax. Update header comment:
 
 ```markdown
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Tasks and steps use checkbox (`- [ ]`) syntax for tracking.
 ```
 
-- [ ] **Step 3:** Verify the change
+- [ ] **Step 3:** Verify change
 
 Run: `grep -A 5 "For agentic workers:" skills/writing-plans/SKILL.md`
-Expected: Shows updated header with checkbox syntax mention
+Expected: Shows updated header w/ checkbox syntax mention
 
 - [ ] **Step 4:** Commit
 

@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Give Claude a browser-based visual companion for brainstorming sessions - show mockups, prototypes, and interactive choices alongside terminal conversation.
+**Goal:** Give Claude browser-based visual companion for brainstorm sessions — show mockups, prototypes, interactive choices alongside terminal convo.
 
-**Architecture:** Claude writes HTML to a temp file. A local Node.js server watches that file and serves it with an auto-injected helper library. User interactions flow via WebSocket to server stdout, which Claude sees in background task output.
+**Architecture:** Claude write HTML to temp file. Local Node.js server watch file, serve with auto-injected helper lib. User interactions flow via WebSocket → server stdout. Claude see in background task output.
 
 **Tech Stack:** Node.js, Express, ws (WebSocket), chokidar (file watching)
 
@@ -124,12 +124,12 @@ server.listen(PORT, '127.0.0.1', () => {
 **Step 3: Run npm install**
 
 Run: `cd lib/brainstorm-server && npm install`
-Expected: Dependencies installed
+Expected: Deps installed
 
 **Step 4: Test server starts**
 
 Run: `cd lib/brainstorm-server && timeout 3 node index.js || true`
-Expected: See JSON with `server-started` and port info
+Expected: JSON with `server-started` + port info
 
 **Step 5: Commit**
 
@@ -247,7 +247,7 @@ git commit -m "feat: add brainstorm server foundation"
 })();
 ```
 
-**Step 2: Verify helper.js is syntactically valid**
+**Step 2: Verify helper.js syntax valid**
 
 Run: `node -c lib/brainstorm-server/helper.js`
 Expected: No syntax errors
@@ -410,7 +410,7 @@ git commit -m "test: add brainstorm server integration tests"
 - Modify: `skills/brainstorming/SKILL.md`
 - Create: `skills/brainstorming/visual-companion.md` (supporting doc)
 
-**Step 1: Create the supporting documentation**
+**Step 1: Create supporting docs**
 
 Create `skills/brainstorming/visual-companion.md`:
 
@@ -516,10 +516,10 @@ The terminal remains the primary conversation interface. The browser is a visual
 **Reference:** See `visual-companion.md` in this skill directory for HTML patterns and API details.
 ```
 
-**Step 3: Verify the edits**
+**Step 3: Verify edits**
 
 Run: `grep -A5 "Visual Companion" skills/brainstorming/SKILL.md`
-Expected: Shows the new section
+Expected: Shows new section
 
 **Step 4: Commit**
 
@@ -533,7 +533,7 @@ git commit -m "feat: add visual companion to brainstorming skill"
 ## Task 5: Add Server to Plugin Ignore (Optional Cleanup)
 
 **Files:**
-- Check if `.gitignore` needs node_modules exclusion for lib/brainstorm-server
+- Check if `.gitignore` need node_modules exclusion for lib/brainstorm-server
 
 **Step 1: Check current gitignore**
 
@@ -541,7 +541,7 @@ Run: `cat .gitignore 2>/dev/null || echo "No .gitignore"`
 
 **Step 2: Add node_modules if needed**
 
-If not already present, add:
+If not present, add:
 ```
 lib/brainstorm-server/node_modules/
 ```
@@ -557,15 +557,15 @@ git commit -m "chore: ignore brainstorm-server node_modules"
 
 ## Summary
 
-After completing all tasks:
+After all tasks done:
 
-1. **Server** at `lib/brainstorm-server/` - Node.js server that watches HTML file and relays events
-2. **Helper library** auto-injected - captures clicks, forms, inputs
-3. **Tests** at `tests/brainstorm-server/` - verifies server behavior
-4. **Brainstorming skill** updated with visual companion section and `visual-companion.md` reference doc
+1. **Server** at `lib/brainstorm-server/` — Node.js server watches HTML file + relays events
+2. **Helper library** auto-injected — captures clicks, forms, inputs
+3. **Tests** at `tests/brainstorm-server/` — verifies server behavior
+4. **Brainstorming skill** updated with visual companion section + `visual-companion.md` ref doc
 
 **To use:**
-1. Start server as background job: `node lib/brainstorm-server/index.js &`
-2. Tell user to open `http://localhost:3333`
+1. Start server as bg job: `node lib/brainstorm-server/index.js &`
+2. Tell user open `http://localhost:3333`
 3. Write HTML to `/tmp/brainstorm/screen.html`
 4. Check task output for user events

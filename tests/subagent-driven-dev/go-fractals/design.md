@@ -2,7 +2,7 @@
 
 ## Overview
 
-A command-line tool that generates ASCII art fractals. Supports two fractal types with configurable output.
+CLI tool gen ASCII fractals. Two fractal types, configurable output.
 
 ## Usage
 
@@ -25,26 +25,26 @@ fractals sierpinski --help
 
 ### `sierpinski`
 
-Generates a Sierpinski triangle using recursive subdivision.
+Gen Sierpinski triangle via recursive subdivision.
 
 Flags:
-- `--size` (default: 32) - Width of the triangle base in characters
-- `--depth` (default: 5) - Recursion depth
-- `--char` (default: '*') - Character to use for filled points
+- `--size` (default: 32) - triangle base width chars
+- `--depth` (default: 5) - recursion depth
+- `--char` (default: '*') - char for filled points
 
-Output: Triangle printed to stdout, one line per row.
+Output: triangle → stdout, one line per row.
 
-### `mandelbrot`
+## `mandelbrot`
 
-Renders the Mandelbrot set as ASCII art. Maps iteration count to characters.
+Render Mandelbrot set as ASCII. Iter count → chars.
 
 Flags:
-- `--width` (default: 80) - Output width in characters
-- `--height` (default: 24) - Output height in characters
-- `--iterations` (default: 100) - Maximum iterations for escape calculation
-- `--char` (default: gradient) - Single character, or omit for gradient " .:-=+*#%@"
+- `--width` (default: 80) - output width chars
+- `--height` (default: 24) - output height chars
+- `--iterations` (default: 100) - max iter for escape calc
+- `--char` (default: gradient) - single char, or omit → gradient " .:-=+*#%@"
 
-Output: Rectangle printed to stdout.
+Output: rectangle → stdout.
 
 ## Architecture
 
@@ -73,9 +73,9 @@ internal/
 ## Acceptance Criteria
 
 1. `fractals --help` shows usage
-2. `fractals sierpinski` outputs a recognizable triangle
-3. `fractals mandelbrot` outputs a recognizable Mandelbrot set
+2. `fractals sierpinski` outputs recognizable triangle
+3. `fractals mandelbrot` outputs recognizable Mandelbrot set
 4. `--size`, `--width`, `--height`, `--depth`, `--iterations` flags work
-5. `--char` customizes output character
-6. Invalid inputs produce clear error messages
+5. `--char` customizes output char
+6. Invalid input → clear error msg
 7. All tests pass
